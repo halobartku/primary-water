@@ -77,7 +77,7 @@ export function WhatIsPrimaryWater() {
         className="text-center mt-8 space-y-4"
       >
         <a
-          href="https://findprimarywater.com/images/Primary%20Water%20Introduction%20EN.pdf"
+          href="https://primerywater.com/images/Primary%20Water%20Introduction%20EN.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 text-white rounded-full shadow-md hover:shadow-lg hover:bg-blue-600 transition-all group"
