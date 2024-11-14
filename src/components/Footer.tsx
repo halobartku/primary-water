@@ -86,7 +86,7 @@ export function Footer() {
           </div>
           <nav className="text-center md:text-left">
             <a 
-              href="/PrivacyPolicy.tsx" 
+              href="/privacy" 
               className="text-sm text-blue-600 hover:text-blue-800 transition-colors"
             >
               Privacy Policy
