@@ -12,7 +12,8 @@ export function CookieConsent({ onClose }: CookieConsentProps) {
   const [preferences, setPreferences] = useState({
     necessary: true,
     analytics: false,
-    marketing: false
+    marketing: false,
+    performance: false
   })
   const [showPreferences, setShowPreferences] = useState(false)
 
@@ -33,7 +34,7 @@ export function CookieConsent({ onClose }: CookieConsentProps) {
   }, [])
 
   const handleAccept = () => {
-    const newPreferences = { ...preferences, analytics: true, marketing: true }
+    const newPreferences = { ...preferences, analytics: true, marketing: true, performance: true }
     localStorage.setItem('cookieConsent', JSON.stringify(newPreferences))
     setPreferences(newPreferences)
     setIsVisible(false)
@@ -82,6 +83,19 @@ export function CookieConsent({ onClose }: CookieConsentProps) {
                       type="checkbox"
                       checked={preferences.necessary}
                       disabled
+                      className="rounded border-blue-300 text-blue-500 focus:ring-blue-500"
+                    />
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h4 className="font-medium text-blue-900">Performance Cookies</h4>
+                      <p className="text-sm text-blue-700">Help us measure and improve website performance</p>
+                    </div>
+                    <input
+                      type="checkbox"
+                      checked={preferences.performance}
+                      onChange={(e) => setPreferences(prev => ({ ...prev, performance: e.target.checked }))}
                       className="rounded border-blue-300 text-blue-500 focus:ring-blue-500"
                     />
                   </div>

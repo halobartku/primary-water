@@ -84,9 +84,13 @@ export function PrivacyPolicy() {
             </p>
             <ul className="list-disc pl-6 text-blue-700">
               <li>Necessary cookies: Required for the website to function</li>
+              <li>Performance cookies: Used by Vercel Speed Insights to measure and improve website performance</li>
               <li>Analytics cookies: Help us understand how visitors use our site</li>
               <li>Marketing cookies: Used to deliver relevant advertisements</li>
             </ul>
+            <p className="text-blue-700 mt-4">
+              We use Vercel Speed Insights to monitor and improve our website's performance. This service collects anonymous performance metrics such as page load times and web vitals. This data helps us identify and fix performance issues to provide a better user experience. No personally identifiable information is collected through this service.
+            </p>
           </section>
 
           <section>
