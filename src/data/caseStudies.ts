@@ -22,5 +22,29 @@ export const caseStudies = [
     videoId: "4Qm4zyKxdTs",
     description: "Successfully established a reliable water source in one of Earth's driest regions, ensuring a lifetime of sustainable water supply.",
     flag: "🇿🇦"
+  },
+  {
+    location: "Catalonia, Spain",
+    depth: 200,
+    capacity: 648,
+    videoId: "a72tveKyOlA",
+    description: "After multiple failed attempts by others near Barcelona, we discovered a verified water source yielding 648 cubic meters daily.",
+    flag: "🇪🇸"
+  },
+  {
+    location: "Saudi Arabia",
+    depth: 150,
+    capacity: 1000,
+    videoId: "rP5S55VzZNQ",
+    description: "Uncovered a significant primary water reservoir in the challenging terrain of Western Australia, offering hope for remote communities.",
+    flag: "🇸🇦"
+  },
+  {
+    location: "Latvia",
+    depth: 63,
+    capacity: 200,
+    videoId: "5AXGm97CHcc",
+    description: "We discovered a self-flowing primary water well in Latvia, yielding 200 cubic meters daily without pumping.",
+    flag: "🇱🇻"
   }
 ]

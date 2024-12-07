@@ -2,7 +2,11 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Cookie, Settings } from 'lucide-react'
 
-export function CookieConsent() {
+interface CookieConsentProps {
+  onClose: () => void;
+}
+
+export function CookieConsent({ onClose }: CookieConsentProps) {
   const [isVisible, setIsVisible] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [preferences, setPreferences] = useState({
@@ -33,12 +37,14 @@ export function CookieConsent() {
     localStorage.setItem('cookieConsent', JSON.stringify(newPreferences))
     setPreferences(newPreferences)
     setIsVisible(false)
+    onClose()
   }
 
   const handleSavePreferences = () => {
     localStorage.setItem('cookieConsent', JSON.stringify(preferences))
     setIsVisible(false)
     setShowPreferences(false)
+    onClose()
   }
 
   return (

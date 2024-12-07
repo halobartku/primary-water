@@ -83,24 +83,30 @@ function MainContent() {
             {index === 1 && <WhatIsPrimaryWater />}
             {index === 2 && <AboutUs />}
             {index === 3 && (
-              <div className="max-w-6xl mx-auto p-4 md:p-8">
-                <h2 className="text-3xl md:text-5xl font-bold text-blue-900 text-center mb-8 md:mb-12">
+              <div className="max-w-7xl mx-auto p-4 md:p-6">
+                <h2 className="text-3xl md:text-5xl font-bold text-blue-900 text-center mb-8">
                   Case Studies
                 </h2>
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 md:gap-6">
                   {caseStudies.map((study, idx) => (
-                    <CaseStudyCard 
+                    <motion.div
                       key={study.location}
-                      {...study}
-                      index={idx}
-                    />
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: idx * 0.1 }}
+                    >
+                      <CaseStudyCard 
+                        {...study}
+                        index={idx}
+                      />
+                    </motion.div>
                   ))}
                 </div>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
-                  className="text-center mt-8"
+                  className="text-center mt-6 md:mt-8"
                 >
                   <a
                     href="https://www.youtube.com/@FindPrimaryWater"
