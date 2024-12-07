@@ -17,6 +17,7 @@ import { Hero } from './components/Hero'
 import { useWaterGame } from './hooks/useWaterGame'
 import { caseStudies } from './data/caseStudies'
 import type { NavItem } from './types'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 
 function MainContent() {
   const [currentSection, setCurrentSection] = useState(0)
@@ -143,6 +144,7 @@ export default function App() {
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      <SpeedInsights />
     </Router>
   )
 }
