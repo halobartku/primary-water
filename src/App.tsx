@@ -35,6 +35,32 @@ function MainContent() {
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = sectionsRef.current.findIndex((ref) => ref === entry.target)
+            if (index !== -1) {
+              setCurrentSection(index)
+            }
+          }
+        })
+      },
+      { threshold: 0.5 }
+    )
+
+    sectionsRef.current.forEach((section) => {
+      if (section) observer.observe(section)
+    })
+
+    return () => {
+      sectionsRef.current.forEach((section) => {
+        if (section) observer.unobserve(section)
+      })
+    }
+  }, [])
+
   const sections: NavItem[] = [
     { id: 0, title: 'Home', icon: Home },
     { id: 1, title: 'What is Primary Water', icon: HelpCircle },

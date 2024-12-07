@@ -8,7 +8,6 @@ interface CookieConsentProps {
 
 export function CookieConsent({ onClose }: CookieConsentProps) {
   const [isVisible, setIsVisible] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
   const [preferences, setPreferences] = useState({
     necessary: true,
     analytics: false,
@@ -24,13 +23,6 @@ export function CookieConsent({ onClose }: CookieConsentProps) {
     } else {
       setPreferences(JSON.parse(consent))
     }
-
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768)
-    }
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
   const handleAccept = () => {
