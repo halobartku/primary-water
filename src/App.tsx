@@ -103,7 +103,7 @@ function MainContent() {
             key={section.id}
             ref={el => sectionsRef.current[index] = el}
             className={`min-h-screen snap-start flex items-center justify-center relative ${
-              isMobile ? 'py-16 px-4' : 'py-20'
+              isMobile ? 'py-16 pb-24 px-4' : 'py-20'
             }`}
           >
             {index === 0 && <Hero onDiscoverClick={() => scrollToSection(1)} onContactClick={() => scrollToSection(4)} />}
