@@ -36,7 +36,7 @@ export const caseStudies = [
     depth: 150,
     capacity: 1000,
     videoId: "rP5S55VzZNQ",
-    description: "Uncovered a significant primary water reservoir in the challenging terrain of Western Australia, offering hope for remote communities.",
+    description: "Despite negative forecasts in Saudi Arabian desert, we discovered a water source yielding 1,000 cubic meters daily.",
     flag: "🇸🇦"
   },
   {
