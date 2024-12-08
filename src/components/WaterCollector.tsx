@@ -43,7 +43,17 @@ interface WaterCollectorProps {
 export function WaterCollector({ waterCollected }: WaterCollectorProps) {
   const [showFact, setShowFact] = useState(false)
   const [currentFact, setCurrentFact] = useState('')
+  const [isMobile, setIsMobile] = useState(false)
   const displayDuration = 4800 // 4.8 seconds (60% of 8 seconds)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   const handleClick = () => {
     const randomFact = waterFacts[Math.floor(Math.random() * waterFacts.length)]
@@ -55,7 +65,11 @@ export function WaterCollector({ waterCollected }: WaterCollectorProps) {
     <>
       <button
         onClick={handleClick}
-        className="fixed left-4 bottom-16 z-50 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg flex items-center gap-2 hover:bg-white transition-colors"
+        className={`
+          fixed left-4 z-[999] bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg 
+          flex items-center gap-2 hover:bg-white transition-colors
+          ${isMobile ? 'bottom-2' : 'bottom-16'}
+        `}
       >
         <Droplets className="w-5 h-5 text-blue-500" />
         <span className="font-bold text-blue-900">{waterCollected}</span>
