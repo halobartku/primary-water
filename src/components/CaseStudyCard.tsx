@@ -5,13 +5,12 @@ interface CaseStudyProps {
   location: string
   depth: number
   capacity: number
-  index: number
   videoId: string
   description: string
   flag: string
 }
 
-export function CaseStudyCard({ location, depth, capacity, index, videoId, description, flag }: CaseStudyProps) {
+export function CaseStudyCard({ location, depth, capacity, videoId, description, flag }: CaseStudyProps) {
   const [isPlaying, setIsPlaying] = useState(false)
 
   return (

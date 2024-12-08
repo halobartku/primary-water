@@ -124,7 +124,6 @@ function MainContent() {
                     >
                       <CaseStudyCard 
                         {...study}
-                        index={idx}
                       />
                     </motion.div>
                   ))}
