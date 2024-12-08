@@ -71,20 +71,21 @@ export function Footer() {
           ${isMobile ? 'pb-[env(safe-area-inset-bottom,0px)]' : ''}
         `}
       >
-        <div className="max-w-7xl mx-auto px-4 py-3 md:flex justify-between items-center">
-          <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 mb-2 md:mb-0">
-            <p className="text-sm text-blue-700 text-center md:text-left">
-              © {new Date().getFullYear()} Primary Water. All rights reserved.
+        <div className="max-w-7xl mx-auto px-4 py-3 flex justify-center md:justify-between items-center">
+          <div className={`flex flex-col md:flex-row md:items-center gap-2 md:gap-4 ${isMobile ? '' : 'mb-2 md:mb-0'}`}>
+            <p className="text-sm text-blue-700 text-center md:text-left whitespace-nowrap">
+              &copy; {new Date().getFullYear()} Primary Water
+              <span className="hidden md:inline">. All rights reserved.</span>
             </p>
             <span className="hidden md:inline text-blue-300">|</span>
             <a 
               href="mailto:office@findprimarywater.com"
-              className="text-sm text-blue-600 hover:text-blue-800 transition-colors text-center md:text-left"
+              className="hidden md:inline text-sm text-blue-600 hover:text-blue-800 transition-colors text-center md:text-left"
             >
               office@findprimarywater.com
             </a>
           </div>
-          <nav className="text-center md:text-left">
+          <nav className="hidden md:block text-center md:text-left">
             <a 
               href="/privacy" 
               className="text-sm text-blue-600 hover:text-blue-800 transition-colors"
