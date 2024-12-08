@@ -20,7 +20,7 @@ export function Footer() {
       className={`
         fixed bottom-0 left-0 right-0 z-60
         bg-white/80 backdrop-blur-sm border-t border-blue-100
-        ${isMobile ? 'pb-[env(safe-area-inset-bottom,0px)]' : ''}
+        ${isMobile ? 'pb-[env(safe-area-inset-bottom,0px)] mt-8' : ''}
       `}
       style={{
         transform: 'translate3d(0, 0, 0)',
@@ -30,7 +30,7 @@ export function Footer() {
         willChange: 'transform'
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 py-3 flex justify-center md:justify-between items-center">
+      <div className="max-w-7xl mx-auto px-4 py-4 md:py-3 flex justify-center md:justify-between items-center">
         <div className={`flex flex-col md:flex-row md:items-center gap-2 md:gap-4 ${isMobile ? '' : 'mb-2 md:mb-0'}`}>
           <p className="text-sm text-blue-700 text-center md:text-left whitespace-nowrap">
             &copy; {new Date().getFullYear()} Primary Water
