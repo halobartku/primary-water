@@ -177,7 +177,7 @@ function MainContent() {
 
   return (
     <div 
-      className="min-h-screen bg-hero-gradient overflow-hidden flex flex-col"
+      className="min-h-screen bg-hero-gradient overflow-x-hidden flex flex-col"
       onMouseMove={handleMouseMove}
     >
       {/* Logo */}
@@ -203,8 +203,8 @@ function MainContent() {
         ref={containerRef}
         className={`
           relative z-10 flex-1 w-full
-          ${isMobile ? 'snap-y overflow-y-auto' : 'snap-x overflow-x-auto overflow-y-hidden'}
-          snap-mandatory smooth-scroll
+          ${isMobile ? 'snap-y snap-mandatory overflow-y-auto overflow-x-hidden' : 'snap-x snap-mandatory overflow-x-auto overflow-y-hidden'}
+          smooth-scroll
           ${isMobile ? 'flex-col' : 'flex-row'}
           flex
         `}
@@ -215,53 +215,55 @@ function MainContent() {
             ref={el => sectionsRef.current[index] = el}
             className={`
               relative
-              ${isMobile ? 'min-h-screen w-full' : 'min-w-full w-screen h-screen flex-shrink-0'}
+              ${isMobile ? 'min-h-screen w-full max-w-full' : 'min-w-full w-screen h-screen flex-shrink-0'}
               snap-start
               flex items-center justify-center
-              ${isMobile ? 'py-16 pb-32 px-4' : 'px-20'}
+              ${isMobile ? 'py-12 px-3' : 'px-20'}
             `}
           >
-            {index === 0 && <Hero onDiscoverClick={() => scrollToSection(1)} onContactClick={() => scrollToSection(4)} />}
-            {index === 1 && <WhatIsPrimaryWater />}
-            {index === 2 && <AboutUs />}
-            {index === 3 && (
-              <div className="w-full max-w-[85%] lg:max-w-[1000px] mx-auto flex flex-col justify-center h-full">
-                <h2 className="text-4xl md:text-5xl font-bold text-blue-900 text-center mb-6">
-                  Case Studies
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1.5 mb-2">
-                  {caseStudies.map((study, idx) => (
-                    <motion.div
-                      key={study.location}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: idx * 0.1 }}
-                    >
-                      <CaseStudyCard 
-                        {...study}
-                      />
-                    </motion.div>
-                  ))}
-                </div>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 }}
-                  className="text-center -mt-0"
-                >
-                  <a
-                    href="https://www.youtube.com/@FindPrimaryWater"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 hover:bg-white rounded-full shadow-md hover:shadow-lg transition-all group text-sm"
+            <div className="w-full max-w-[100vw] overflow-x-hidden">
+              {index === 0 && <Hero onDiscoverClick={() => scrollToSection(1)} onContactClick={() => scrollToSection(4)} />}
+              {index === 1 && <WhatIsPrimaryWater />}
+              {index === 2 && <AboutUs />}
+              {index === 3 && (
+                <div className="w-full max-w-[85%] lg:max-w-[1000px] mx-auto flex flex-col justify-center h-full">
+                  <h2 className="text-4xl md:text-5xl font-bold text-blue-900 text-center mb-6">
+                    Case Studies
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1.5 mb-2">
+                    {caseStudies.map((study, idx) => (
+                      <motion.div
+                        key={study.location}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: idx * 0.1 }}
+                      >
+                        <CaseStudyCard 
+                          {...study}
+                        />
+                      </motion.div>
+                    ))}
+                  </div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6 }}
+                    className="text-center -mt-0"
                   >
-                    <span className="text-blue-700 font-medium">Watch more on our YouTube channel</span>
-                    <ExternalLink className="w-4 h-4 text-blue-500 group-hover:translate-x-1 transition-transform flex-shrink-0" />
-                  </a>
-                </motion.div>
-              </div>
-            )}
-            {index === 4 && <ContactCard />}
+                    <a
+                      href="https://www.youtube.com/@FindPrimaryWater"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 hover:bg-white rounded-full shadow-md hover:shadow-lg transition-all group text-sm"
+                    >
+                      <span className="text-blue-700 font-medium">Watch more on our YouTube channel</span>
+                      <ExternalLink className="w-4 h-4 text-blue-500 group-hover:translate-x-1 transition-transform flex-shrink-0" />
+                    </a>
+                  </motion.div>
+                </div>
+              )}
+              {index === 4 && <ContactCard />}
+            </div>
           </section>
         ))}
       </div>
