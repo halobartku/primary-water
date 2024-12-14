@@ -65,12 +65,12 @@ export function Hero({ onDiscoverClick, onContactClick }: HeroProps) {
           Unlock sustainable, weather-independent water sources with our innovative primary water location techniques. 
           Expert solutions for agriculture, industry, and communities worldwide.
         </p>
-        <div className="flex flex-wrap gap-3 md:gap-6 justify-center">
+        <div className="flex flex-wrap gap-3 md:gap-4 justify-center">
           <motion.button
             onClick={onDiscoverClick}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-blue-500 text-white px-8 md:px-12 py-3 md:py-4 rounded-lg text-lg md:text-xl font-medium hover:bg-blue-600 transition-colors"
+            className="px-6 py-3 bg-blue-500 text-white rounded-full shadow-md hover:shadow-lg hover:bg-blue-600 transition-all font-medium"
           >
             Discover Primary Water
           </motion.button>
@@ -78,7 +78,7 @@ export function Hero({ onDiscoverClick, onContactClick }: HeroProps) {
             onClick={onContactClick}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-white text-blue-500 px-8 md:px-12 py-3 md:py-4 rounded-lg text-lg md:text-xl font-medium hover:bg-blue-50 transition-colors"
+            className="px-6 py-3 bg-white/80 hover:bg-white rounded-full shadow-md hover:shadow-lg transition-all text-blue-700 font-medium"
           >
             Contact Us
           </motion.button>
