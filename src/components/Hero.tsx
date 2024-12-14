@@ -6,29 +6,71 @@ interface HeroProps {
 }
 
 export function Hero({ onDiscoverClick, onContactClick }: HeroProps) {
+  const textVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  }
+
+  const letterVariants = {
+    hidden: { 
+      opacity: 0,
+      y: 50,
+      rotateX: -90
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      transition: {
+        type: "spring",
+        damping: 12,
+        stiffness: 100
+      }
+    }
+  }
+
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="max-w-4xl mx-auto text-center px-4 flex flex-col justify-center min-h-[80vh]"
+      className="w-full h-full flex items-center justify-center px-4 md:px-8"
     >
-      <div>
-        <h1 className="text-5xl md:text-6xl font-bold text-blue-900 mb-4 md:mb-6 whitespace-nowrap">
-         Primary Water
-        </h1>
-        <h2 className="text-2xl md:text-3xl font-semibold text-blue-800 mb-3 md:mb-4">
-           We Find Water Everywhere
+      <div className="max-w-[90%] md:max-w-4xl mx-auto text-center">
+        <motion.h1 
+          variants={textVariants}
+          initial="hidden"
+          animate="visible"
+          className="text-3xl md:text-7xl lg:text-8xl font-bold text-blue-900 mb-4 md:mb-6 whitespace-nowrap"
+        >
+          {Array.from("Primary Water").map((letter, index) => (
+            <motion.span
+              key={index}
+              variants={letterVariants}
+              className="inline-block"
+              style={{ display: letter === " " ? "inline" : "inline-block" }}
+            >
+              {letter}
+            </motion.span>
+          ))}
+        </motion.h1>
+        <h2 className="text-2xl md:text-4xl lg:text-5xl font-semibold text-blue-800 mb-3 md:mb-4">
+          We Find Water Everywhere
         </h2>
-        <p className="text-lg md:text-xl text-blue-700 max-w-2xl mx-auto leading-relaxed mb-6 md:mb-8">
+        <p className="text-lg md:text-xl lg:text-2xl text-blue-700 max-w-2xl lg:max-w-3xl mx-auto leading-relaxed mb-6 md:mb-8">
           Unlock sustainable, weather-independent water sources with our innovative primary water location techniques. 
           Expert solutions for agriculture, industry, and communities worldwide.
         </p>
-        <div className="flex flex-wrap gap-3 md:gap-4 justify-center">
+        <div className="flex flex-wrap gap-3 md:gap-6 justify-center">
           <motion.button
             onClick={onDiscoverClick}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-blue-500 text-white px-8 py-3 rounded-lg text-lg font-medium hover:bg-blue-600 transition-colors"
+            className="bg-blue-500 text-white px-8 md:px-12 py-3 md:py-4 rounded-lg text-lg md:text-xl font-medium hover:bg-blue-600 transition-colors"
           >
             Discover Primary Water
           </motion.button>
@@ -36,7 +78,7 @@ export function Hero({ onDiscoverClick, onContactClick }: HeroProps) {
             onClick={onContactClick}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-white text-blue-500 px-8 py-3 rounded-lg text-lg font-medium hover:bg-blue-50 transition-colors"
+            className="bg-white text-blue-500 px-8 md:px-12 py-3 md:py-4 rounded-lg text-lg md:text-xl font-medium hover:bg-blue-50 transition-colors"
           >
             Contact Us
           </motion.button>

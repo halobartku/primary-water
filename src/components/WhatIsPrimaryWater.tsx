@@ -26,7 +26,7 @@ export function WhatIsPrimaryWater() {
   ]
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -40,7 +40,7 @@ export function WhatIsPrimaryWater() {
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto scale-85">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto">
         {features.map((feature, index) => (
           <motion.div
             key={feature.title}
@@ -74,25 +74,25 @@ export function WhatIsPrimaryWater() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6 }}
-        className="text-center mt-8 space-y-4"
+        className="text-center mt-8"
       >
-        <a
-          href="https://primerywater.com/images/Primary%20Water%20Introduction%20EN.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 text-white rounded-full shadow-md hover:shadow-lg hover:bg-blue-600 transition-all group"
-        >
-          <FileText className="w-5 h-5" />
-          <span className="font-medium">Primary Water Introduction</span>
-          <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-        </a>
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+          <a
+            href="https://primerywater.com/images/Primary%20Water%20Introduction%20EN.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 text-white rounded-full shadow-md hover:shadow-lg hover:bg-blue-600 transition-all group whitespace-nowrap"
+          >
+            <FileText className="w-5 h-5" />
+            <span className="font-medium">Primary Water Introduction</span>
+            <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </a>
 
-        <div>
           <a
             href="https://primarywaterinstitute.org/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white/80 hover:bg-white rounded-full shadow-md hover:shadow-lg transition-all group"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-white/80 hover:bg-white rounded-full shadow-md hover:shadow-lg transition-all group whitespace-nowrap"
           >
             <span className="text-blue-700 font-medium">Learn more at Primary Water Institute</span>
             <ExternalLink className="w-4 h-4 text-blue-500 group-hover:translate-x-1 transition-transform" />

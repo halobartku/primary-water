@@ -59,11 +59,11 @@ export function AboutUs() {
   ]
 
   return (
-    <div className="max-w-5xl mx-auto px-4">
+    <div className="max-w-4xl mx-auto px-4 h-full flex flex-col justify-center">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-8"
+        className="text-center mb-6"
       >
         <h2 className="text-4xl md:text-5xl font-bold text-blue-900">About Us</h2>
       </motion.div>
@@ -71,12 +71,12 @@ export function AboutUs() {
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-6"
+        className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-4 md:p-6"
       >
-        <div className="space-y-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="space-y-4 md:space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
             <div>
-              <div className="aspect-video rounded-xl overflow-hidden shadow-md mb-3">
+              <div className="aspect-video rounded-xl overflow-hidden shadow-md mb-2 md:mb-3">
                 <video 
                   className="w-full h-full object-cover"
                   autoPlay 
@@ -94,23 +94,23 @@ export function AboutUs() {
               </p>
             </div>
 
-            <div className="bg-gradient-to-br from-blue-900 to-blue-800 text-white p-5 rounded-xl">
-              <h3 className="text-lg font-semibold mb-4">Our Process</h3>
-              <div className="space-y-3">
+            <div className="bg-gradient-to-br from-blue-900 to-blue-800 text-white p-4 rounded-xl">
+              <h3 className="text-base md:text-lg font-semibold mb-3">Our Process</h3>
+              <div className="space-y-2.5">
                 {process.map((step, index) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="flex items-center gap-3 relative"
+                    className="flex items-center gap-2 relative"
                   >
-                    <div className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0 shadow-lg">
+                    <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0 shadow-lg">
                       <span className="text-xs font-bold">{step.step}</span>
                     </div>
                     
                     {index < process.length - 1 && (
-                      <div className="absolute left-3 top-6 w-[1px] h-6 bg-blue-500/30" />
+                      <div className="absolute left-2.5 md:left-3 top-5 md:top-6 w-[1px] h-5 md:h-6 bg-blue-500/30" />
                     )}
                     
                     <div className="flex-1">
@@ -123,17 +123,17 @@ export function AboutUs() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-blue-50/50 p-3 rounded-xl group hover:bg-blue-50 transition-colors text-center"
+                className="bg-blue-50/50 p-2 md:p-3 rounded-xl group hover:bg-blue-50 transition-colors text-center"
               >
-                <div className="p-1.5 rounded-lg bg-white text-blue-500 mx-auto w-fit mb-2 group-hover:scale-110 transition-transform">
-                  <feature.icon className="w-4 h-4" />
+                <div className="p-1 md:p-1.5 rounded-lg bg-white text-blue-500 mx-auto w-fit mb-1.5 md:mb-2 group-hover:scale-110 transition-transform">
+                  <feature.icon className="w-3.5 h-3.5 md:w-4 md:h-4" />
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold text-blue-900 mb-0.5">{feature.title}</h3>

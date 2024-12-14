@@ -25,6 +25,15 @@ function MainContent() {
   const { waterDrops, waterCollected, mousePosition, handleMouseMove } = useWaterGame()
   const [showCookieConsent, setShowCookieConsent] = useState(true)
   const [isMobile, setIsMobile] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [isScrolling, setIsScrolling] = useState(false)
+  const scrollAccumulator = useRef(0)
+  const lastScrollTime = useRef(Date.now())
+  const lastDelta = useRef(0)
+  const SCROLL_THRESHOLD = 150
+  const SCROLL_COOLDOWN = 300
+  const ACCUMULATOR_RESET_DELAY = 200
+  const lastAccumulatorReset = useRef(Date.now())
 
   useEffect(() => {
     const checkMobile = () => {
@@ -34,6 +43,91 @@ function MainContent() {
     window.addEventListener('resize', checkMobile)
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
+
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      if (isMobile) return
+
+      if (e.target instanceof Element) {
+        const targetElement = e.target as Element
+        if (
+          targetElement.tagName === 'SELECT' ||
+          targetElement.closest('select') ||
+          targetElement.closest('.dropdown-content')
+        ) {
+          return
+        }
+      }
+      
+      e.preventDefault()
+      
+      if (isScrolling || !containerRef.current) return
+
+      const now = Date.now()
+      
+      if (now - lastAccumulatorReset.current > ACCUMULATOR_RESET_DELAY) {
+        scrollAccumulator.current = 0
+        lastAccumulatorReset.current = now
+      }
+
+      if (now - lastScrollTime.current < SCROLL_COOLDOWN) {
+        return
+      }
+
+      let normalizedDelta = e.deltaY
+      if (e.deltaMode === 1) {
+        normalizedDelta *= 5
+      } else if (e.deltaMode === 2) {
+        normalizedDelta *= window.innerHeight / 4
+      }
+
+      if (Math.sign(normalizedDelta) !== Math.sign(lastDelta.current)) {
+        scrollAccumulator.current = 0
+      }
+      lastDelta.current = normalizedDelta
+
+      if (Math.abs(normalizedDelta) < 50) {
+        normalizedDelta *= 0.3
+      }
+
+      scrollAccumulator.current += normalizedDelta
+
+      if (Math.abs(scrollAccumulator.current) < SCROLL_THRESHOLD) {
+        return
+      }
+
+      setIsScrolling(true)
+      lastScrollTime.current = now
+      
+      let nextSection = currentSection
+      
+      if (scrollAccumulator.current < 0 && currentSection > 0) {
+        nextSection = currentSection - 1
+      } else if (scrollAccumulator.current > 0 && currentSection < sectionsRef.current.length - 1) {
+        nextSection = currentSection + 1
+      }
+      
+      scrollAccumulator.current = 0
+      lastAccumulatorReset.current = now
+      
+      scrollToSection(nextSection)
+      
+      setTimeout(() => {
+        setIsScrolling(false)
+      }, 500)
+    }
+
+    const container = containerRef.current
+    if (container) {
+      container.addEventListener('wheel', handleWheel, { passive: false })
+    }
+
+    return () => {
+      if (container) {
+        container.removeEventListener('wheel', handleWheel)
+      }
+    }
+  }, [currentSection, isScrolling, isMobile])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -70,12 +164,20 @@ function MainContent() {
   ]
 
   const scrollToSection = (index: number) => {
-    sectionsRef.current[index]?.scrollIntoView({ behavior: 'smooth' })
+    const section = sectionsRef.current[index]
+    if (section) {
+      if (isMobile) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      } else {
+        section.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' })
+      }
+      setCurrentSection(index)
+    }
   }
 
   return (
     <div 
-      className="min-h-screen bg-hero-gradient overflow-x-hidden flex flex-col"
+      className="min-h-screen bg-hero-gradient overflow-hidden flex flex-col"
       onMouseMove={handleMouseMove}
     >
       {/* Logo */}
@@ -97,24 +199,37 @@ function MainContent() {
       />
 
       {/* Content sections */}
-      <div className="snap-y snap-mandatory h-screen overflow-y-auto smooth-scroll flex-grow">
+      <div 
+        ref={containerRef}
+        className={`
+          relative z-10 flex-1 w-full
+          ${isMobile ? 'snap-y overflow-y-auto' : 'snap-x overflow-x-auto overflow-y-hidden'}
+          snap-mandatory smooth-scroll
+          ${isMobile ? 'flex-col' : 'flex-row'}
+          flex
+        `}
+      >
         {sections.map((section, index) => (
           <section 
             key={section.id}
             ref={el => sectionsRef.current[index] = el}
-            className={`min-h-screen snap-start flex items-center justify-center relative ${
-              isMobile ? 'py-16 pb-32 px-4' : 'py-20'
-            }`}
+            className={`
+              relative
+              ${isMobile ? 'min-h-screen w-full' : 'min-w-full w-screen h-screen flex-shrink-0'}
+              snap-start
+              flex items-center justify-center
+              ${isMobile ? 'py-16 pb-32 px-4' : 'px-20'}
+            `}
           >
             {index === 0 && <Hero onDiscoverClick={() => scrollToSection(1)} onContactClick={() => scrollToSection(4)} />}
             {index === 1 && <WhatIsPrimaryWater />}
             {index === 2 && <AboutUs />}
             {index === 3 && (
-              <div className="max-w-7xl mx-auto p-4 md:p-6">
-                <h2 className="text-3xl md:text-5xl font-bold text-blue-900 text-center mb-8">
+              <div className="w-full max-w-[85%] lg:max-w-[1000px] mx-auto flex flex-col justify-center h-full">
+                <h2 className="text-4xl md:text-5xl font-bold text-blue-900 text-center mb-6">
                   Case Studies
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 md:gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1.5 mb-2">
                   {caseStudies.map((study, idx) => (
                     <motion.div
                       key={study.location}
@@ -132,16 +247,16 @@ function MainContent() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
-                  className="text-center mt-6 md:mt-8"
+                  className="text-center -mt-0"
                 >
                   <a
                     href="https://www.youtube.com/@FindPrimaryWater"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-white/80 hover:bg-white rounded-full shadow-md hover:shadow-lg transition-all group"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 hover:bg-white rounded-full shadow-md hover:shadow-lg transition-all group text-sm"
                   >
                     <span className="text-blue-700 font-medium">Watch more on our YouTube channel</span>
-                    <ExternalLink className="w-4 h-4 text-blue-500 group-hover:translate-x-1 transition-transform" />
+                    <ExternalLink className="w-4 h-4 text-blue-500 group-hover:translate-x-1 transition-transform flex-shrink-0" />
                   </a>
                 </motion.div>
               </div>

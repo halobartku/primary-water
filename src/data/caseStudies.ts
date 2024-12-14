@@ -16,7 +16,7 @@ export const caseStudies = [
     flag: "🇩🇪"
   },
   {
-    location: "Kalahari, South Africa",
+    location: "Kalahari Desert",
     depth: 150,
     capacity: 200,
     videoId: "4Qm4zyKxdTs",
