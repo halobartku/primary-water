@@ -38,7 +38,7 @@ export function Hero({ onDiscoverClick, onContactClick }: HeroProps) {
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="w-full h-full flex items-start md:items-center justify-center px-4 md:px-8 pt-24 md:pt-0"
+      className="w-full h-full flex items-start md:items-center justify-center px-4 md:px-8 pt-16 md:pt-0"
     >
       <div className="max-w-[90%] md:max-w-4xl mx-auto text-center">
         <motion.h1 
