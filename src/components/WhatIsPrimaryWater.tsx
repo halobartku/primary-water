@@ -52,17 +52,16 @@ export function WhatIsPrimaryWater() {
             <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50/30 rounded-full -mr-16 -mt-16 transform group-hover:scale-150 transition-transform duration-500 ease-out" />
             
             <div className="relative z-10">
-              <div className="mb-4 transform group-hover:scale-110 transition-transform duration-300">
-                <div className="w-12 h-12 rounded-2xl bg-primary-gradient flex items-center justify-center">
-                  <feature.icon className="w-6 h-6 text-white" />
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-xl bg-primary-gradient flex items-center justify-center flex-shrink-0 transform group-hover:scale-110 transition-transform duration-300">
+                  <feature.icon className="w-5 h-5 text-white" />
                 </div>
+                <h3 className="text-xl font-semibold text-blue-900">
+                  {feature.title}
+                </h3>
               </div>
               
-              <h3 className="text-xl font-semibold text-blue-900 mb-2">
-                {feature.title}
-              </h3>
-              
-              <p className="text-blue-700 leading-relaxed text-sm">
+              <p className="text-blue-700 leading-relaxed text-base">
                 {feature.description}
               </p>
             </div>
@@ -74,28 +73,28 @@ export function WhatIsPrimaryWater() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6 }}
-        className="text-center mt-8"
+        className="text-center mt-8 space-y-4 md:space-y-0"
       >
         <div className="flex flex-col md:flex-row items-center justify-center gap-4">
           <a
             href="https://primerywater.com/images/Primary%20Water%20Introduction%20EN.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 text-white rounded-full shadow-md hover:shadow-lg hover:bg-blue-600 transition-all group whitespace-nowrap"
+            className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-blue-500 text-white rounded-full shadow-md hover:shadow-lg hover:bg-blue-600 transition-all group w-full md:w-auto"
           >
-            <FileText className="w-5 h-5" />
-            <span className="font-medium">Primary Water Introduction</span>
-            <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <FileText className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+            <span className="text-sm sm:text-base font-medium">Primary Water Introduction</span>
+            <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform flex-shrink-0" />
           </a>
 
           <a
             href="https://primarywaterinstitute.org/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white/80 hover:bg-white rounded-full shadow-md hover:shadow-lg transition-all group whitespace-nowrap"
+            className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-white/80 hover:bg-white rounded-full shadow-md hover:shadow-lg transition-all group w-full md:w-auto"
           >
-            <span className="text-blue-700 font-medium">Learn more at Primary Water Institute</span>
-            <ExternalLink className="w-4 h-4 text-blue-500 group-hover:translate-x-1 transition-transform" />
+            <span className="text-sm sm:text-base text-blue-700 font-medium">Learn more at Primary Water Institute</span>
+            <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500 group-hover:translate-x-1 transition-transform flex-shrink-0" />
           </a>
         </div>
       </motion.div>

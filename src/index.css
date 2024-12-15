@@ -2,99 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Modern Gradient Backgrounds */
-.bg-primary-gradient {
-  background: linear-gradient(135deg, #0891b2 0%, #0e7490 50%, #155e75 100%);
+@layer base {
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
 }
 
 .bg-hero-gradient {
-  background: linear-gradient(160deg, #f0fdfa 0%, #ccfbf1 50%, #99f6e4 100%);
-  position: relative;
+  background: linear-gradient(180deg, #E3F2F9 0%, #BEE6F3 100%);
 }
 
-.bg-hero-gradient::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    120deg,
-    rgba(255, 255, 255, 0.4),
-    rgba(204, 251, 241, 0.2)
-  );
-  pointer-events: none;
-}
-
-.bg-card-gradient {
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 253, 250, 0.95) 100%);
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(153, 246, 228, 0.1);
-  backdrop-filter: blur(8px);
-  border-radius: 100vh;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(8, 145, 178, 0.3);
-  backdrop-filter: blur(8px);
-  border-radius: 100vh;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(8, 145, 178, 0.5);
-}
-
-/* Glass Morphism */
-.glass-morphism {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(153, 246, 228, 0.3);
-}
-
-/* Mobile Optimizations */
-@media (max-width: 768px) {
-  html {
-    scroll-snap-type: y proximity;
-    height: 100%;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    min-height: -webkit-fill-available;
-  }
-
-  body {
-    height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    position: relative;
-    min-height: 100vh;
-  }
-
-  #root {
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
-    position: relative;
-  }
-
-  .snap-mandatory > * {
-    scroll-snap-align: start;
-    scroll-snap-stop: normal;
-  }
-
-  /* Improve touch scrolling */
-  .smooth-scroll {
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
-  }
-
-  /* Ensure content doesn't overlap with footer on mobile */
-  .min-h-screen {
-    min-height: calc(100vh - env(safe-area-inset-bottom, 0px));
-    min-height: calc(-webkit-fill-available - env(safe-area-inset-bottom, 0px));
-  }
+.smooth-scroll {
+  scroll-behavior: smooth;
 }

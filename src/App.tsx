@@ -1,32 +1,70 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useEffect, Suspense, lazy } from 'react'
 import { Mail, Info, HelpCircle, Home, BookOpen, ExternalLink } from 'lucide-react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
+import { HelmetProvider } from 'react-helmet-async'
 import { BackgroundAnimations } from './components/BackgroundAnimations'
 import { MouseAnimations } from './components/MouseAnimations'
 import { WaterCollector } from './components/WaterCollector'
 import { Navigation } from './components/Navigation'
-import { AboutUs } from './components/AboutUs'
-import { WhatIsPrimaryWater } from './components/WhatIsPrimaryWater'
-import { CaseStudyCard } from './components/CaseStudyCard'
-import { ContactCard } from './components/ContactCard'
-import { CookieConsent } from './components/CookieConsent'
-import { Footer } from './components/Footer'
-import { PrivacyPolicy } from './components/PrivacyPolicy'
 import { Hero } from './components/Hero'
-import { useWaterGame } from './hooks/useWaterGame'
+import { SEO } from './components/SEO'
+import { SkipLink } from './components/SkipLink'
+import { KeyboardInstructions } from './components/KeyboardInstructions'
 import { caseStudies } from './data/caseStudies'
 import type { NavItem } from './types'
 import { SpeedInsights } from '@vercel/speed-insights/react'
+import { AppProvider, useApp } from './context/AppContext'
+import { WaterGameProvider, useWaterGame } from './context/WaterGameContext'
+import { ErrorBoundary } from './components/ErrorBoundary'
+import { LoadingSpinner } from './components/LoadingSpinner'
+import { useKeyboardNavigation } from './hooks/useKeyboardNavigation'
+
+// Lazy load components with named exports
+const AboutUs = lazy(() => 
+  import('./components/AboutUs').then(module => ({ default: module.AboutUs }))
+)
+const WhatIsPrimaryWater = lazy(() => 
+  import('./components/WhatIsPrimaryWater').then(module => ({ default: module.WhatIsPrimaryWater }))
+)
+const CaseStudyCard = lazy(() => 
+  import('./components/CaseStudyCard').then(module => ({ default: module.CaseStudyCard }))
+)
+const ContactCard = lazy(() => 
+  import('./components/ContactCard').then(module => ({ default: module.ContactCard }))
+)
+const CookieConsent = lazy(() => 
+  import('./components/CookieConsent').then(module => ({ default: module.CookieConsent }))
+)
+const Footer = lazy(() => 
+  import('./components/Footer').then(module => ({ default: module.Footer }))
+)
+const PrivacyPolicy = lazy(() => 
+  import('./components/PrivacyPolicy').then(module => ({ default: module.PrivacyPolicy }))
+)
+
+// Page transition variants
+const pageTransition = {
+  initial: { opacity: 0, x: -20 },
+  animate: { opacity: 1, x: 0 },
+  exit: { opacity: 0, x: 20 }
+}
 
 function MainContent() {
-  const [currentSection, setCurrentSection] = useState(0)
-  const sectionsRef = useRef<(HTMLElement | null)[]>([])
+  const { 
+    currentSection, 
+    setCurrentSection, 
+    isMobile, 
+    showCookieConsent, 
+    setShowCookieConsent,
+    isScrolling,
+    setIsScrolling 
+  } = useApp()
+  
   const { waterDrops, waterCollected, mousePosition, handleMouseMove } = useWaterGame()
-  const [showCookieConsent, setShowCookieConsent] = useState(true)
-  const [isMobile, setIsMobile] = useState(false)
+  
+  const sectionsRef = useRef<(HTMLElement | null)[]>([])
   const containerRef = useRef<HTMLDivElement>(null)
-  const [isScrolling, setIsScrolling] = useState(false)
   const scrollAccumulator = useRef(0)
   const lastScrollTime = useRef(Date.now())
   const lastDelta = useRef(0)
@@ -35,14 +73,33 @@ function MainContent() {
   const ACCUMULATOR_RESET_DELAY = 200
   const lastAccumulatorReset = useRef(Date.now())
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768)
+  const sections: NavItem[] = [
+    { id: 0, title: 'Home', icon: Home },
+    { id: 1, title: 'What is Primary Water', icon: HelpCircle },
+    { id: 2, title: 'About', icon: Info },
+    { id: 3, title: 'Case Studies', icon: BookOpen },
+    { id: 4, title: 'Contact', icon: Mail },
+  ]
+
+  const scrollToSection = (index: number) => {
+    const section = sectionsRef.current[index]
+    if (section) {
+      if (isMobile) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      } else {
+        section.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' })
+      }
+      setCurrentSection(index)
     }
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
+  }
+
+  // Enable keyboard navigation
+  useKeyboardNavigation({
+    currentSection,
+    totalSections: sections.length,
+    onNavigate: scrollToSection,
+    enabled: !isMobile
+  })
 
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
@@ -127,7 +184,7 @@ function MainContent() {
         container.removeEventListener('wheel', handleWheel)
       }
     }
-  }, [currentSection, isScrolling, isMobile])
+  }, [currentSection, isScrolling, isMobile, setIsScrolling])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -153,33 +210,26 @@ function MainContent() {
         if (section) observer.unobserve(section)
       })
     }
-  }, [])
-
-  const sections: NavItem[] = [
-    { id: 0, title: 'Home', icon: Home },
-    { id: 1, title: 'What is Primary Water', icon: HelpCircle },
-    { id: 2, title: 'About', icon: Info },
-    { id: 3, title: 'Case Studies', icon: BookOpen },
-    { id: 4, title: 'Contact', icon: Mail },
-  ]
-
-  const scrollToSection = (index: number) => {
-    const section = sectionsRef.current[index]
-    if (section) {
-      if (isMobile) {
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      } else {
-        section.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' })
-      }
-      setCurrentSection(index)
-    }
-  }
+  }, [setCurrentSection])
 
   return (
     <div 
       className="min-h-screen bg-hero-gradient overflow-x-hidden flex flex-col"
       onMouseMove={handleMouseMove}
     >
+      <SEO 
+        title={`Primary Water - ${sections[currentSection].title}`}
+        description={
+          currentSection === 0 
+            ? "Discover sustainable water sources with Primary Water. We specialize in locating natural water sources using innovative methods."
+            : `Learn about ${sections[currentSection].title.toLowerCase()} at Primary Water`
+        }
+      />
+
+      {/* Accessibility Skip Links */}
+      <SkipLink targetId="main-content">Skip to main content</SkipLink>
+      <SkipLink targetId="main-nav">Skip to navigation</SkipLink>
+
       {/* Logo */}
       <div className="fixed left-4 top-4 z-50">
         <img 
@@ -192,14 +242,19 @@ function MainContent() {
       <BackgroundAnimations />
       <MouseAnimations waterDrops={waterDrops} mousePosition={mousePosition} />
       <WaterCollector waterCollected={waterCollected} />
-      <Navigation 
-        sections={sections}
-        currentSection={currentSection}
-        onNavigate={scrollToSection}
-      />
+      
+      {/* Main Navigation */}
+      <nav id="main-nav" role="navigation" aria-label="Main navigation">
+        <Navigation 
+          sections={sections}
+          currentSection={currentSection}
+          onNavigate={scrollToSection}
+        />
+      </nav>
 
       {/* Content sections */}
-      <div 
+      <main 
+        id="main-content"
         ref={containerRef}
         className={`
           relative z-10 flex-1 w-full
@@ -208,9 +263,11 @@ function MainContent() {
           ${isMobile ? 'flex-col' : 'flex-row'}
           flex
         `}
+        role="main"
+        aria-live="polite"
       >
         {sections.map((section, index) => (
-          <section 
+          <motion.section 
             key={section.id}
             ref={el => sectionsRef.current[index] = el}
             className={`
@@ -220,72 +277,114 @@ function MainContent() {
               flex items-center justify-center
               ${isMobile ? 'py-12 px-3' : 'px-20'}
             `}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            variants={pageTransition}
+            role="region"
+            aria-label={section.title}
+            tabIndex={0}
           >
             <div className="w-full max-w-[100vw] overflow-x-hidden">
-              {index === 0 && <Hero onDiscoverClick={() => scrollToSection(1)} onContactClick={() => scrollToSection(4)} />}
-              {index === 1 && <WhatIsPrimaryWater />}
-              {index === 2 && <AboutUs />}
-              {index === 3 && (
-                <div className="w-full max-w-[85%] lg:max-w-[1000px] mx-auto flex flex-col justify-center h-full">
-                  <h2 className="text-4xl md:text-5xl font-bold text-blue-900 text-center mb-6">
-                    Case Studies
-                  </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1.5 mb-2">
-                    {caseStudies.map((study, idx) => (
+              <ErrorBoundary>
+                <Suspense fallback={<LoadingSpinner />}>
+                  {index === 0 && <Hero onDiscoverClick={() => scrollToSection(1)} onContactClick={() => scrollToSection(4)} />}
+                  {index === 1 && <WhatIsPrimaryWater />}
+                  {index === 2 && <AboutUs />}
+                  {index === 3 && (
+                    <div className="w-full max-w-[85%] lg:max-w-[1000px] mx-auto flex flex-col justify-center h-full">
+                      <h2 className="text-4xl md:text-5xl font-bold text-blue-900 text-center mb-6">
+                        Case Studies
+                      </h2>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1.5 mb-2">
+                        {caseStudies.map((study, idx) => (
+                          <motion.div
+                            key={study.location}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: idx * 0.1 }}
+                          >
+                            <CaseStudyCard 
+                              {...study}
+                            />
+                          </motion.div>
+                        ))}
+                      </div>
                       <motion.div
-                        key={study.location}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: idx * 0.1 }}
+                        transition={{ delay: 0.6 }}
+                        className="text-center"
                       >
-                        <CaseStudyCard 
-                          {...study}
-                        />
+                        <a
+                          href="https://www.youtube.com/@FindPrimaryWater"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-white/80 hover:bg-white rounded-full shadow-md hover:shadow-lg transition-all group text-sm"
+                          aria-label="Watch more case studies on our YouTube channel"
+                        >
+                          <span className="text-blue-700 font-medium">Watch more on our YouTube channel</span>
+                          <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500 group-hover:translate-x-1 transition-transform flex-shrink-0" />
+                        </a>
                       </motion.div>
-                    ))}
-                  </div>
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6 }}
-                    className="text-center -mt-0"
-                  >
-                    <a
-                      href="https://www.youtube.com/@FindPrimaryWater"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 hover:bg-white rounded-full shadow-md hover:shadow-lg transition-all group text-sm"
-                    >
-                      <span className="text-blue-700 font-medium">Watch more on our YouTube channel</span>
-                      <ExternalLink className="w-4 h-4 text-blue-500 group-hover:translate-x-1 transition-transform flex-shrink-0" />
-                    </a>
-                  </motion.div>
-                </div>
-              )}
-              {index === 4 && <ContactCard />}
+                    </div>
+                  )}
+                  {index === 4 && <ContactCard />}
+                </Suspense>
+              </ErrorBoundary>
             </div>
-          </section>
+          </motion.section>
         ))}
-      </div>
+      </main>
 
       {showCookieConsent && (
-        <div className={isMobile ? 'mb-16' : ''}>
-          <CookieConsent onClose={() => setShowCookieConsent(false)} />
+        <div role="complementary" aria-label="Cookie consent">
+          <Suspense fallback={null}>
+            <CookieConsent onClose={() => setShowCookieConsent(false)} />
+          </Suspense>
         </div>
       )}
-      <Footer />
+      
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
+
+      {/* Keyboard Navigation Instructions */}
+      {!isMobile && <KeyboardInstructions />}
     </div>
+  )
+}
+
+function AppWithProviders() {
+  return (
+    <ErrorBoundary>
+      <HelmetProvider>
+        <AppProvider>
+          <WaterGameProvider>
+            <MainContent />
+          </WaterGameProvider>
+        </AppProvider>
+      </HelmetProvider>
+    </ErrorBoundary>
   )
 }
 
 export default function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<MainContent />} />
-        <Route path="/privacy" element={<PrivacyPolicy />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+      <ErrorBoundary>
+        <AnimatePresence mode="wait">
+          <Routes>
+            <Route path="/" element={<AppWithProviders />} />
+            <Route path="/privacy" element={
+              <Suspense fallback={<LoadingSpinner />}>
+                <PrivacyPolicy />
+              </Suspense>
+            } />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </AnimatePresence>
+      </ErrorBoundary>
       <SpeedInsights />
     </Router>
   )
