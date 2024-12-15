@@ -5,10 +5,10 @@ export function KeyboardInstructions() {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
+    <div className="fixed right-4 bottom-16 z-[999]">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-2 bg-white/80 hover:bg-white rounded-full shadow-md transition-all"
+        className="bg-white/90 hover:bg-white backdrop-blur-sm rounded-full p-2 shadow-lg transition-all"
         aria-label="Keyboard shortcuts"
       >
         <Keyboard className="w-5 h-5 text-blue-500" />

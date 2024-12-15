@@ -1,6 +1,9 @@
+/* eslint-disable */
+/* This is a valid Tailwind CSS file */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* eslint-enable */
 
 @layer base {
   ::-webkit-scrollbar {

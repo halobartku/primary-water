@@ -11,6 +11,7 @@ import { Hero } from './components/Hero'
 import { SEO } from './components/SEO'
 import { SkipLink } from './components/SkipLink'
 import { KeyboardInstructions } from './components/KeyboardInstructions'
+import { PrivacyPreferences } from './components/PrivacyPreferences'
 import { caseStudies } from './data/caseStudies'
 import type { NavItem } from './types'
 import { SpeedInsights } from '@vercel/speed-insights/react'
@@ -33,9 +34,6 @@ const CaseStudyCard = lazy(() =>
 const ContactCard = lazy(() => 
   import('./components/ContactCard').then(module => ({ default: module.ContactCard }))
 )
-const CookieConsent = lazy(() => 
-  import('./components/CookieConsent').then(module => ({ default: module.CookieConsent }))
-)
 const Footer = lazy(() => 
   import('./components/Footer').then(module => ({ default: module.Footer }))
 )
@@ -55,8 +53,8 @@ function MainContent() {
     currentSection, 
     setCurrentSection, 
     isMobile, 
-    showCookieConsent, 
-    setShowCookieConsent,
+    showPrivacyPreferences, 
+    setShowPrivacyPreferences,
     isScrolling,
     setIsScrolling 
   } = useApp()
@@ -337,11 +335,9 @@ function MainContent() {
         ))}
       </main>
 
-      {showCookieConsent && (
-        <div role="complementary" aria-label="Cookie consent">
-          <Suspense fallback={null}>
-            <CookieConsent onClose={() => setShowCookieConsent(false)} />
-          </Suspense>
+      {showPrivacyPreferences && (
+        <div role="complementary" aria-label="Privacy preferences">
+          <PrivacyPreferences onClose={() => setShowPrivacyPreferences(false)} />
         </div>
       )}
       
@@ -371,7 +367,7 @@ function AppWithProviders() {
 
 export default function App() {
   return (
-    <Router>
+    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <ErrorBoundary>
         <AnimatePresence mode="wait">
           <Routes>

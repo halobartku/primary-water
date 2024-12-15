@@ -9,12 +9,12 @@ A modern, interactive website for Primary Water Sp. z o. o., showcasing our expe
 - 🎥 Video case studies from around the world
 - 🔍 Detailed information about primary water
 - 📊 Performance monitoring with Vercel Speed Insights
-- 🍪 GDPR-compliant cookie consent management
+- 🔒 GDPR-compliant privacy preferences management
 
 ## Tech Stack
 
 - **Frontend Framework**: React 18 with TypeScript
-- **Routing**: React Router v6
+- **Routing**: React Router v6 (with v7 future flags enabled)
 - **Styling**: Tailwind CSS
 - **Animations**: Framer Motion
 - **Icons**: Lucide React
@@ -78,7 +78,7 @@ primary-water/
 
 - `App.tsx` - Main application component with routing and layout
 - `Navigation.tsx` - Responsive navigation bar with desktop/mobile views
-- `CookieConsent.tsx` - GDPR-compliant cookie consent management
+- `PrivacyPreferences.tsx` - GDPR-compliant privacy and cookie preferences management
 - `CaseStudyCard.tsx` - Display case studies with video integration
 - `WaterCollector.tsx` - Interactive water collection game element
 
@@ -94,10 +94,11 @@ To deploy:
 ## Privacy and Cookies
 
 The website includes:
-- Cookie consent management
+- Privacy preferences management with granular control
 - Privacy policy page
 - Performance monitoring via Vercel Speed Insights
 - Analytics tracking (configurable by users)
+- Ad-blocker friendly implementation
 
 ## License
 

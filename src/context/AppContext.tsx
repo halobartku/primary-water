@@ -4,8 +4,8 @@ interface AppContextType {
   currentSection: number
   setCurrentSection: (section: number) => void
   isMobile: boolean
-  showCookieConsent: boolean
-  setShowCookieConsent: (show: boolean) => void
+  showPrivacyPreferences: boolean
+  setShowPrivacyPreferences: (show: boolean) => void
   isScrolling: boolean
   setIsScrolling: (scrolling: boolean) => void
 }
@@ -15,7 +15,7 @@ const AppContext = createContext<AppContextType | undefined>(undefined)
 export function AppProvider({ children }: { children: ReactNode }) {
   const [currentSection, setCurrentSection] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
-  const [showCookieConsent, setShowCookieConsent] = useState(true)
+  const [showPrivacyPreferences, setShowPrivacyPreferences] = useState(true)
   const [isScrolling, setIsScrolling] = useState(false)
 
   useEffect(() => {
@@ -33,8 +33,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         currentSection,
         setCurrentSection,
         isMobile,
-        showCookieConsent,
-        setShowCookieConsent,
+        showPrivacyPreferences,
+        setShowPrivacyPreferences,
         isScrolling,
         setIsScrolling
       }}

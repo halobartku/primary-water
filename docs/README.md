@@ -22,7 +22,7 @@ primary-water/
 │   │   ├── BackgroundAnimations  # Water bubble animations
 │   │   ├── CaseStudyCard        # Case study display
 │   │   ├── ContactCard          # Contact form
-│   │   ├── CookieConsent       # GDPR compliance
+│   │   ├── PrivacyPreferences       # GDPR compliance
 │   │   ├── Footer              # Site footer
 │   │   ├── Hero               # Landing section
 │   │   ├── MouseAnimations    # Cursor effects
@@ -229,8 +229,8 @@ The application is configured for Vercel deployment:
 ## Security
 
 ### GDPR Compliance
-- Cookie consent management
-- Privacy policy implementation
+- Privacy Preferences management
+- Privacy Preferences implementation
 - User data handling
 
 ### Best Practices

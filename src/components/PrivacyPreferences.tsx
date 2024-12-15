@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Cookie, Settings } from 'lucide-react'
 
-interface CookieConsentProps {
+interface PrivacyPreferencesProps {
   onClose: () => void;
 }
 
-export function CookieConsent({ onClose }: CookieConsentProps) {
+export function PrivacyPreferences({ onClose }: PrivacyPreferencesProps) {
   const [isVisible, setIsVisible] = useState(false)
   const [preferences, setPreferences] = useState({
     necessary: true,
@@ -17,7 +17,7 @@ export function CookieConsent({ onClose }: CookieConsentProps) {
   const [showPreferences, setShowPreferences] = useState(false)
 
   useEffect(() => {
-    const consent = localStorage.getItem('cookieConsent')
+    const consent = localStorage.getItem('privacyPreferences')
     if (!consent) {
       setIsVisible(true)
     } else {
@@ -27,14 +27,14 @@ export function CookieConsent({ onClose }: CookieConsentProps) {
 
   const handleAccept = () => {
     const newPreferences = { ...preferences, analytics: true, marketing: true, performance: true }
-    localStorage.setItem('cookieConsent', JSON.stringify(newPreferences))
+    localStorage.setItem('privacyPreferences', JSON.stringify(newPreferences))
     setPreferences(newPreferences)
     setIsVisible(false)
     onClose()
   }
 
   const handleSavePreferences = () => {
-    localStorage.setItem('cookieConsent', JSON.stringify(preferences))
+    localStorage.setItem('privacyPreferences', JSON.stringify(preferences))
     setIsVisible(false)
     setShowPreferences(false)
     onClose()
@@ -54,7 +54,7 @@ export function CookieConsent({ onClose }: CookieConsentProps) {
               <div className="flex items-start gap-4 mb-4">
                 <Cookie className="w-6 h-6 text-blue-500 flex-shrink-0 mt-1" />
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-blue-900 mb-2">Cookie Settings</h3>
+                  <h3 className="text-lg font-semibold text-blue-900 mb-2">Privacy Preferences</h3>
                   <p className="text-blue-700 text-sm">
                     We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.
                     <a href="/privacy" className="text-blue-500 hover:text-blue-600 ml-1">

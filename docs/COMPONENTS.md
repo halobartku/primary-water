@@ -124,20 +124,26 @@ interface WaterCollectorProps {
 <WaterCollector waterCollected={150} />
 ```
 
-## CookieConsent Component
+## PrivacyPreferences Component
 
-`CookieConsent.tsx` - GDPR-compliant cookie consent banner.
+`PrivacyPreferences.tsx` - GDPR-compliant privacy and cookie preferences management.
 
 ### Props
 ```typescript
-interface CookieConsentProps {
+interface PrivacyPreferencesProps {
   onClose: () => void;
 }
 ```
 
+### Features
+- Granular control over different types of cookies
+- Persistent preferences storage
+- Ad-blocker friendly implementation
+- Accessible UI with proper ARIA attributes
+
 ### Usage
 ```tsx
-<CookieConsent onClose={() => setShowCookieConsent(false)} />
+<PrivacyPreferences onClose={() => setShowPrivacyPreferences(false)} />
 ```
 
 ## ContactCard Component
