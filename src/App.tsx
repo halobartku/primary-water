@@ -1,5 +1,5 @@
 import { useRef, useEffect, Suspense, lazy } from 'react'
-import { Mail, Info, HelpCircle, Home, BookOpen, ExternalLink } from 'lucide-react'
+import { Mail, Info, HelpCircle, Home, BookOpen, ExternalLink, Droplets } from 'lucide-react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { HelmetProvider } from 'react-helmet-async'
@@ -40,6 +40,9 @@ const Footer = lazy(() =>
 const PrivacyPolicy = lazy(() => 
   import('./components/PrivacyPolicy').then(module => ({ default: module.PrivacyPolicy }))
 )
+const WaterStressVisualization = lazy(() => 
+  import('./components/WaterStressVisualization')
+)
 
 // Page transition variants
 const pageTransition = {
@@ -76,7 +79,8 @@ function MainContent() {
     { id: 1, title: 'What is Primary Water', icon: HelpCircle },
     { id: 2, title: 'About', icon: Info },
     { id: 3, title: 'Case Studies', icon: BookOpen },
-    { id: 4, title: 'Contact', icon: Mail },
+    { id: 4, title: 'Water Stress', icon: Droplets },
+    { id: 5, title: 'Contact', icon: Mail },
   ]
 
   const scrollToSection = (index: number) => {
@@ -286,7 +290,7 @@ function MainContent() {
             <div className="w-full max-w-[100vw] overflow-x-hidden">
               <ErrorBoundary>
                 <Suspense fallback={<LoadingSpinner />}>
-                  {index === 0 && <Hero onDiscoverClick={() => scrollToSection(1)} onContactClick={() => scrollToSection(4)} />}
+                  {index === 0 && <Hero onDiscoverClick={() => scrollToSection(1)} onContactClick={() => scrollToSection(5)} />}
                   {index === 1 && <WhatIsPrimaryWater />}
                   {index === 2 && <AboutUs />}
                   {index === 3 && (
@@ -327,7 +331,8 @@ function MainContent() {
                       </motion.div>
                     </div>
                   )}
-                  {index === 4 && <ContactCard />}
+                  {index === 4 && <WaterStressVisualization />}
+                  {index === 5 && <ContactCard />}
                 </Suspense>
               </ErrorBoundary>
             </div>

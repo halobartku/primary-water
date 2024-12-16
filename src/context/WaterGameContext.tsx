@@ -37,7 +37,7 @@ export function WaterGameProvider({ children }: { children: ReactNode }) {
     if (now - lastDropTime < 50) return
 
     const newDrop: WaterDrop = {
-      id: `drop-${now}`,
+      id: `drop-${now}-${Math.random().toString(36).substr(2, 9)}`,
       x,
       y,
     }
