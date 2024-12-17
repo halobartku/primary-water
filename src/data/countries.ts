@@ -32,6 +32,7 @@ export const countries: CountryData[] = [
   { name: 'Uruguay', code: 'URY', region: REGIONS.SOUTH_AMERICA },
   { name: 'Guyana', code: 'GUY', region: REGIONS.SOUTH_AMERICA },
   { name: 'Suriname', code: 'SUR', region: REGIONS.SOUTH_AMERICA },
+  { name: 'French Guiana', code: 'GUF', region: REGIONS.SOUTH_AMERICA },
 
   // Europe
   { name: 'United Kingdom', code: 'GBR', region: REGIONS.EUROPE },
@@ -69,6 +70,10 @@ export const countries: CountryData[] = [
   { name: 'Luxembourg', code: 'LUX', region: REGIONS.EUROPE },
   { name: 'Malta', code: 'MLT', region: REGIONS.EUROPE },
   { name: 'Iceland', code: 'ISL', region: REGIONS.EUROPE },
+  { name: 'Turkey', code: 'TUR', region: REGIONS.EUROPE },
+  { name: 'Serbia', code: 'SRB', region: REGIONS.EUROPE },
+  { name: 'Belarus', code: 'BLR', region: REGIONS.EUROPE },
+  { name: 'Ukraine', code: 'UKR', region: REGIONS.EUROPE },
 
   // Asia
   { name: 'China', code: 'CHN', region: REGIONS.ASIA },
@@ -79,19 +84,27 @@ export const countries: CountryData[] = [
   { name: 'Japan', code: 'JPN', region: REGIONS.ASIA },
   { name: 'Philippines', code: 'PHL', region: REGIONS.ASIA },
   { name: 'Vietnam', code: 'VNM', region: REGIONS.ASIA },
-  { name: 'Turkey', code: 'TUR', region: REGIONS.ASIA },
-  { name: 'Iran', code: 'IRN', region: REGIONS.ASIA },
   { name: 'Thailand', code: 'THA', region: REGIONS.ASIA },
   { name: 'Myanmar', code: 'MMR', region: REGIONS.ASIA },
   { name: 'South Korea', code: 'KOR', region: REGIONS.ASIA },
-  { name: 'Iraq', code: 'IRQ', region: REGIONS.ASIA },
   { name: 'Afghanistan', code: 'AFG', region: REGIONS.ASIA },
-  { name: 'Saudi Arabia', code: 'SAU', region: REGIONS.ASIA },
   { name: 'Uzbekistan', code: 'UZB', region: REGIONS.ASIA },
   { name: 'Malaysia', code: 'MYS', region: REGIONS.ASIA },
-  { name: 'Yemen', code: 'YEM', region: REGIONS.ASIA },
   { name: 'Nepal', code: 'NPL', region: REGIONS.ASIA },
   { name: 'North Korea', code: 'PRK', region: REGIONS.ASIA },
+  { name: 'Sri Lanka', code: 'LKA', region: REGIONS.ASIA },
+  { name: 'Kazakhstan', code: 'KAZ', region: REGIONS.ASIA },
+  { name: 'Cambodia', code: 'KHM', region: REGIONS.ASIA },
+  { name: 'Laos', code: 'LAO', region: REGIONS.ASIA },
+  { name: 'Kyrgyzstan', code: 'KGZ', region: REGIONS.ASIA },
+  { name: 'Tajikistan', code: 'TJK', region: REGIONS.ASIA },
+  { name: 'Turkmenistan', code: 'TKM', region: REGIONS.ASIA },
+  { name: 'Singapore', code: 'SGP', region: REGIONS.ASIA },
+  { name: 'Mongolia', code: 'MNG', region: REGIONS.ASIA },
+  { name: 'Maldives', code: 'MDV', region: REGIONS.ASIA },
+  { name: 'Brunei', code: 'BRN', region: REGIONS.ASIA },
+  { name: 'Bhutan', code: 'BTN', region: REGIONS.ASIA },
+  { name: 'Timor-Leste', code: 'TLS', region: REGIONS.ASIA },
 
   // Africa
   { name: 'Nigeria', code: 'NGA', region: REGIONS.AFRICA },
@@ -129,6 +142,25 @@ export const countries: CountryData[] = [
   { name: 'Togo', code: 'TGO', region: REGIONS.AFRICA },
   { name: 'Sierra Leone', code: 'SLE', region: REGIONS.AFRICA },
   { name: 'Libya', code: 'LBY', region: REGIONS.AFRICA },
+  { name: 'Congo', code: 'COG', region: REGIONS.AFRICA },
+  { name: 'Liberia', code: 'LBR', region: REGIONS.AFRICA },
+  { name: 'Central African Republic', code: 'CAF', region: REGIONS.AFRICA },
+  { name: 'Mauritania', code: 'MRT', region: REGIONS.AFRICA },
+  { name: 'Eritrea', code: 'ERI', region: REGIONS.AFRICA },
+  { name: 'Namibia', code: 'NAM', region: REGIONS.AFRICA },
+  { name: 'Gambia', code: 'GMB', region: REGIONS.AFRICA },
+  { name: 'Botswana', code: 'BWA', region: REGIONS.AFRICA },
+  { name: 'Gabon', code: 'GAB', region: REGIONS.AFRICA },
+  { name: 'Lesotho', code: 'LSO', region: REGIONS.AFRICA },
+  { name: 'Guinea-Bissau', code: 'GNB', region: REGIONS.AFRICA },
+  { name: 'Equatorial Guinea', code: 'GNQ', region: REGIONS.AFRICA },
+  { name: 'Mauritius', code: 'MUS', region: REGIONS.AFRICA },
+  { name: 'Eswatini', code: 'SWZ', region: REGIONS.AFRICA },
+  { name: 'Djibouti', code: 'DJI', region: REGIONS.AFRICA },
+  { name: 'Comoros', code: 'COM', region: REGIONS.AFRICA },
+  { name: 'Cabo Verde', code: 'CPV', region: REGIONS.AFRICA },
+  { name: 'Sao Tome and Principe', code: 'STP', region: REGIONS.AFRICA },
+  { name: 'Seychelles', code: 'SYC', region: REGIONS.AFRICA },
 
   // Oceania
   { name: 'Australia', code: 'AUS', region: REGIONS.OCEANIA },
@@ -140,8 +172,19 @@ export const countries: CountryData[] = [
   { name: 'New Caledonia', code: 'NCL', region: REGIONS.OCEANIA },
   { name: 'French Polynesia', code: 'PYF', region: REGIONS.OCEANIA },
   { name: 'Samoa', code: 'WSM', region: REGIONS.OCEANIA },
+  { name: 'Kiribati', code: 'KIR', region: REGIONS.OCEANIA },
+  { name: 'Micronesia', code: 'FSM', region: REGIONS.OCEANIA },
+  { name: 'Tonga', code: 'TON', region: REGIONS.OCEANIA },
+  { name: 'Marshall Islands', code: 'MHL', region: REGIONS.OCEANIA },
+  { name: 'Palau', code: 'PLW', region: REGIONS.OCEANIA },
+  { name: 'Tuvalu', code: 'TUV', region: REGIONS.OCEANIA },
+  { name: 'Nauru', code: 'NRU', region: REGIONS.OCEANIA },
 
   // Middle East
+  { name: 'Saudi Arabia', code: 'SAU', region: REGIONS.MIDDLE_EAST },
+  { name: 'Iran', code: 'IRN', region: REGIONS.MIDDLE_EAST },
+  { name: 'Iraq', code: 'IRQ', region: REGIONS.MIDDLE_EAST },
+  { name: 'Yemen', code: 'YEM', region: REGIONS.MIDDLE_EAST },
   { name: 'United Arab Emirates', code: 'ARE', region: REGIONS.MIDDLE_EAST },
   { name: 'Israel', code: 'ISR', region: REGIONS.MIDDLE_EAST },
   { name: 'Lebanon', code: 'LBN', region: REGIONS.MIDDLE_EAST },
@@ -151,6 +194,7 @@ export const countries: CountryData[] = [
   { name: 'Oman', code: 'OMN', region: REGIONS.MIDDLE_EAST },
   { name: 'Qatar', code: 'QAT', region: REGIONS.MIDDLE_EAST },
   { name: 'Bahrain', code: 'BHR', region: REGIONS.MIDDLE_EAST },
+  { name: 'Syria', code: 'SYR', region: REGIONS.MIDDLE_EAST },
 
   // Caribbean
   { name: 'Cuba', code: 'CUB', region: REGIONS.CARIBBEAN },
@@ -160,6 +204,12 @@ export const countries: CountryData[] = [
   { name: 'Trinidad and Tobago', code: 'TTO', region: REGIONS.CARIBBEAN },
   { name: 'Bahamas', code: 'BHS', region: REGIONS.CARIBBEAN },
   { name: 'Barbados', code: 'BRB', region: REGIONS.CARIBBEAN },
+  { name: 'Saint Lucia', code: 'LCA', region: REGIONS.CARIBBEAN },
+  { name: 'Grenada', code: 'GRD', region: REGIONS.CARIBBEAN },
+  { name: 'Saint Vincent and the Grenadines', code: 'VCT', region: REGIONS.CARIBBEAN },
+  { name: 'Antigua and Barbuda', code: 'ATG', region: REGIONS.CARIBBEAN },
+  { name: 'Dominica', code: 'DMA', region: REGIONS.CARIBBEAN },
+  { name: 'Saint Kitts and Nevis', code: 'KNA', region: REGIONS.CARIBBEAN },
 
   // Central America
   { name: 'Guatemala', code: 'GTM', region: REGIONS.CENTRAL_AMERICA },
@@ -168,7 +218,7 @@ export const countries: CountryData[] = [
   { name: 'El Salvador', code: 'SLV', region: REGIONS.CENTRAL_AMERICA },
   { name: 'Costa Rica', code: 'CRI', region: REGIONS.CENTRAL_AMERICA },
   { name: 'Panama', code: 'PAN', region: REGIONS.CENTRAL_AMERICA },
-  { name: 'Belize', code: 'BLZ', region: REGIONS.CENTRAL_AMERICA },
+  { name: 'Belize', code: 'BLZ', region: REGIONS.CENTRAL_AMERICA }
 ].sort((a, b) => a.name.localeCompare(b.name)); // Sort alphabetically by name
 
 export const getCountriesByRegion = () => {
