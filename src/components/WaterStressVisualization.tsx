@@ -55,6 +55,16 @@ export default function WaterStressVisualization() {
     return <CountrySelector onSelect={setSelectedCountry} />;
   }
 
+  if (loading) {
+    return (
+      <div className="w-full max-w-4xl mx-auto px-2 sm:px-4 py-2">
+        <div className="flex justify-center items-center min-h-[300px]">
+          <LoadingSpinner />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full max-w-4xl mx-auto px-2 sm:px-4 py-2">
       <div className="bg-white rounded-lg shadow-lg">
@@ -73,19 +83,13 @@ export default function WaterStressVisualization() {
 
         {/* Content */}
         <div className="p-3">
-          {loading && (
-            <div className="flex justify-center items-center h-40">
-              <LoadingSpinner />
-            </div>
-          )}
-
           {error && (
             <div className="p-2 bg-red-100 border border-red-400 text-red-700 rounded-md text-sm">
               {error}
             </div>
           )}
 
-          {data && !loading && (
+          {data && (
             <div className="space-y-3">
               <WaterStressIndicator 
                 waterStress={data.waterStress}
