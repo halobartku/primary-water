@@ -7,6 +7,7 @@ import { WaterUsage } from './WaterUsage';
 import { CountrySelector } from './CountrySelector';
 import { fetchWaterData } from '../services/worldbank';
 import { calculateWaterStressData } from '../utils/waterCalculations';
+import { findCountryByCode } from '../data/countries';
 import type { WaterStressData } from '../utils/waterCalculations';
 
 interface ExtendedWaterData extends WaterStressData {
@@ -65,13 +66,18 @@ export default function WaterStressVisualization() {
     );
   }
 
+  const countryName = findCountryByCode(selectedCountry)?.name || selectedCountry;
+
   return (
     <div className="w-full max-w-4xl mx-auto px-2 sm:px-4 py-2">
       <div className="bg-white rounded-lg shadow-lg">
         {/* Header */}
         <div className="p-3 bg-gray-50 border-b border-gray-200">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-            <h2 className="text-xl font-bold text-gray-800">Water Stress Analysis</h2>
+            <div>
+              <h2 className="text-xl font-bold text-gray-800">Water Stress Analysis</h2>
+              <p className="text-sm text-gray-600">{countryName}</p>
+            </div>
             <button
               onClick={() => setSelectedCountry('')}
               className="text-sm text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 py-1"
