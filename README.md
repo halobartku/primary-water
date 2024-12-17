@@ -10,17 +10,24 @@ A modern, interactive website for Primary Water Sp. z o. o., showcasing our expe
 - 🔍 Detailed information about primary water
 - 📊 Performance monitoring with Vercel Speed Insights
 - 🔒 GDPR-compliant privacy preferences management
+- 🌍 Global water stress visualization and metrics
+- 🎮 Interactive water collection game
+- 🗺️ Country-specific water data integration
+- ⌨️ Enhanced keyboard navigation support
 
 ## Tech Stack
 
 - **Frontend Framework**: React 18 with TypeScript
 - **Routing**: React Router v6 (with v7 future flags enabled)
-- **Styling**: Tailwind CSS
+- **Styling**: Tailwind CSS with PostCSS
 - **Animations**: Framer Motion
 - **Icons**: Lucide React
 - **Build Tool**: Vite
 - **Deployment**: Vercel
 - **Performance Monitoring**: Vercel Speed Insights
+- **External APIs**: World Bank Data Integration
+- **Type Checking**: TypeScript with strict mode
+- **Linting**: ESLint with custom configuration
 
 ## Getting Started
 
@@ -64,23 +71,62 @@ A modern, interactive website for Primary Water Sp. z o. o., showcasing our expe
 
 ```
 primary-water/
+├── docs/              # Project documentation
+│   ├── COMPONENTS.md  # Components documentation
+│   ├── DEPLOYMENT.md  # Deployment guide
+│   ├── DEVELOPMENT.md # Development guidelines
+│   └── TESTING.md     # Testing documentation
 ├── src/
-│   ├── components/     # React components
-│   ├── data/          # Static data and case studies
-│   ├── hooks/         # Custom React hooks
-│   ├── lib/           # Utility functions
-│   └── types/         # TypeScript type definitions
-├── public/            # Static assets
-└── dist/             # Production build output
+│   ├── components/    # React components
+│   ├── context/       # React context providers
+│   ├── data/         # Static data and case studies
+│   ├── hooks/        # Custom React hooks
+│   ├── lib/          # Utility functions
+│   ├── services/     # External API integrations
+│   ├── types/        # TypeScript type definitions
+│   └── utils/        # Helper functions
+├── public/           # Static assets
+└── dist/            # Production build output
 ```
 
 ## Key Components
 
+### Core Components
 - `App.tsx` - Main application component with routing and layout
 - `Navigation.tsx` - Responsive navigation bar with desktop/mobile views
-- `PrivacyPreferences.tsx` - GDPR-compliant privacy and cookie preferences management
-- `CaseStudyCard.tsx` - Display case studies with video integration
-- `WaterCollector.tsx` - Interactive water collection game element
+- `Footer.tsx` - Site-wide footer component
+- `SEO.tsx` - Search engine optimization component
+- `ErrorBoundary.tsx` - Error handling wrapper
+
+### Water-Related Components
+- `WaterCollector.tsx` - Interactive water collection game
+- `WaterMetrics.tsx` - Display water-related statistics
+- `WaterRiskAssessment.tsx` - Water risk analysis tool
+- `WaterStressIndicator.tsx` - Visual indicator for water stress
+- `WaterStressVisualization.tsx` - Geographic water stress data
+- `WaterUsage.tsx` - Water usage tracking and metrics
+- `WhatIsPrimaryWater.tsx` - Educational component about primary water
+
+### Interactive Features
+- `BackgroundAnimations.tsx` - Dynamic background effects
+- `MouseAnimations.tsx` - Mouse-based animations
+- `KeyboardInstructions.tsx` - Keyboard navigation guide
+- `CountrySelector.tsx` - Geographic data selection
+- `CaseStudyCard.tsx` - Project case study displays
+
+### Privacy and User Experience
+- `PrivacyPreferences.tsx` - GDPR-compliant preferences
+- `PrivacyPolicy.tsx` - Privacy policy component
+- `LoadingSpinner.tsx` - Loading state indicator
+- `SkipLink.tsx` - Accessibility navigation
+
+## Documentation
+
+Comprehensive documentation is available in the `docs/` directory:
+- `COMPONENTS.md` - Detailed component documentation
+- `DEPLOYMENT.md` - Deployment procedures and configurations
+- `DEVELOPMENT.md` - Development guidelines and best practices
+- `TESTING.md` - Testing strategies and procedures
 
 ## Deployment
 
