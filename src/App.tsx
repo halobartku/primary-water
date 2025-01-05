@@ -235,7 +235,7 @@ function MainContent() {
       {/* Logo */}
       <div className="fixed left-4 top-4 z-50">
         <img 
-          src="https://primerywater.com/images/Primary-Water_LOGO_v03.png"
+          src="/files/Primary-Water_LOGO_v03.png"
           alt="Primary Water Logo"
           className="h-8 md:h-12 w-auto"
         />

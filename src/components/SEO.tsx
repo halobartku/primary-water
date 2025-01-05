@@ -12,7 +12,7 @@ export function SEO({
   title = 'Primary Water - We Find Water Everywhere',
   description = 'Unlocking sustainable water sources worldwide through innovative primary water discovery. Expert solutions for agriculture, industry, and communities.',
   keywords = 'primary water, water finding, sustainable water, water discovery, groundwater, water solutions, water supply, we find water everywhere, water sourcing experts, sustainable water solutions, weather-independent water, pure water source, water for agriculture, industrial water supply, community water solutions',
-  image = 'https://primerywater.com/images/logo.png',
+  image = '/files/logo.png',
   url = 'https://findprimarywater.com'
 }: SEOProps) {
   const formattedTitle = title === 'Primary Water - Home' ? 'Primary Water - We Find Water Everywhere' : title
@@ -62,13 +62,18 @@ export function SEO({
       <meta name="geo.region" content="PL" />
       <meta name="geo.placename" content="Elbląg" />
       
+      {/* Social Media */}
+      <meta property="og:see_also" content="https://www.youtube.com/@findprimarywater" />
+      <meta property="og:see_also" content="https://www.linkedin.com/company/primary-water/" />
+      <link rel="me" href="https://www.youtube.com/@findprimarywater" />
+      <link rel="me" href="https://www.linkedin.com/company/primary-water/" />
+      
       {/* Links */}
       <link rel="canonical" href={url} />
-      <link rel="icon" href="https://primerywater.com/images/favicon%20primary%20water.png" />
-      <link rel="apple-touch-icon" href="https://primerywater.com/images/favicon%20primary%20water.png" />
+      <link rel="icon" href="/files/favicon primary water.png" />
+      <link rel="apple-touch-icon" href="/files/favicon primary water.png" />
       
       {/* Preconnect to Important Origins */}
-      <link rel="preconnect" href="https://primerywater.com" />
       <link rel="preconnect" href="https://findprimarywater.com" />
     </Helmet>
   )

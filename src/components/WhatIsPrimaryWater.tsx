@@ -77,7 +77,7 @@ export function WhatIsPrimaryWater() {
       >
         <div className="flex flex-col md:flex-row items-center justify-center gap-4">
           <a
-            href="https://primerywater.com/images/Primary%20Water%20Introduction%20EN.pdf"
+            href="/files/Primary Water Introduction EN.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-blue-500 text-white rounded-full shadow-md hover:shadow-lg hover:bg-blue-600 transition-all group w-full md:w-auto"

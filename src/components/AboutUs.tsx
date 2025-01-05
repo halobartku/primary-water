@@ -84,7 +84,7 @@ export function AboutUs() {
                   muted 
                   playsInline
                 >
-                  <source src="https://primerywater.com/images/PrimaryWater1.mp4" type="video/mp4" />
+                  <source src="/files/PrimaryWater1.mp4" type="video/mp4" />
                 </video>
               </div>
               <p className="text-blue-700 text-sm leading-relaxed">
