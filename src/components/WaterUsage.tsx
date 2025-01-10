@@ -44,8 +44,8 @@ export function WaterUsage({
   };
 
   return (
-    <div className="bg-gray-50 p-3 rounded-lg">
-      <h4 className="text-sm font-medium text-gray-700 mb-2">Water Usage by Sector</h4>
+    <div className="bg-white/70 backdrop-blur-sm p-3 rounded-xl shadow-sm">
+      <h4 className="text-sm font-medium text-blue-900 mb-2">Water Usage by Sector</h4>
       
       <div className="flex items-start space-x-3">
         {/* SVG Pie Chart */}
@@ -95,31 +95,31 @@ export function WaterUsage({
             <div className="flex items-center justify-between text-xs">
               <div className="flex items-center">
                 <div className="w-2 h-2 bg-blue-500 rounded-sm mr-1.5" />
-                <span className="text-gray-600">Industrial</span>
+                <span className="text-blue-700">Industrial</span>
               </div>
-              <span className="font-medium">{indPercent.toFixed(1)}%</span>
+              <span className="font-medium text-blue-900">{indPercent.toFixed(1)}%</span>
             </div>
             <div className="flex items-center justify-between text-xs">
               <div className="flex items-center">
                 <div className="w-2 h-2 bg-orange-500 rounded-sm mr-1.5" />
-                <span className="text-gray-600">Domestic</span>
+                <span className="text-blue-700">Domestic</span>
               </div>
-              <span className="font-medium">{domPercent.toFixed(1)}%</span>
+              <span className="font-medium text-blue-900">{domPercent.toFixed(1)}%</span>
             </div>
             <div className="flex items-center justify-between text-xs">
               <div className="flex items-center">
                 <div className="w-2 h-2 bg-green-500 rounded-sm mr-1.5" />
-                <span className="text-gray-600">Agriculture</span>
+                <span className="text-blue-700">Agriculture</span>
               </div>
-              <span className="font-medium">{agrPercent.toFixed(1)}%</span>
+              <span className="font-medium text-blue-900">{agrPercent.toFixed(1)}%</span>
             </div>
           </div>
           
           {/* Total withdrawal */}
-          <div className="mt-2 pt-2 border-t border-gray-200">
+          <div className="mt-2 pt-2 border-t border-blue-100">
             <div className="flex justify-between items-center text-xs">
-              <span className="text-gray-600">Total Annual Withdrawal</span>
-              <span className="font-medium">{formatWithdrawal(totalWithdrawal)}</span>
+              <span className="text-blue-700">Total Annual Withdrawal</span>
+              <span className="font-medium text-blue-900">{formatWithdrawal(totalWithdrawal)}</span>
             </div>
           </div>
         </div>

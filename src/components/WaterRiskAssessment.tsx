@@ -35,7 +35,7 @@ export function WaterRiskAssessment({
             className={`w-1.5 h-1.5 rounded-full ${
               i < level 
                 ? getRiskColor(level)
-                : 'bg-gray-300'
+                : 'bg-blue-200'
             } ${i < level ? 'bg-current' : ''}`}
           />
         ))}
@@ -44,12 +44,12 @@ export function WaterRiskAssessment({
   };
 
   return (
-    <div className="bg-gray-50 p-3 rounded-lg">
-      <h4 className="text-sm font-medium text-gray-700 mb-2">Risk Assessment</h4>
+    <div className="bg-white/70 backdrop-blur-sm p-3 rounded-xl shadow-sm">
+      <h4 className="text-sm font-medium text-blue-900 mb-2">Risk Assessment</h4>
       <div className="space-y-2">
         <div>
           <div className="flex items-center justify-between text-xs">
-            <span className="text-gray-600">Drought Risk</span>
+            <span className="text-blue-700">Drought Risk</span>
             <div className="flex items-center gap-2">
               <RiskIndicator level={droughtRisk} />
               <span className={`font-medium ${getRiskColor(droughtRisk)}`}>
@@ -61,7 +61,7 @@ export function WaterRiskAssessment({
 
         <div>
           <div className="flex items-center justify-between text-xs">
-            <span className="text-gray-600">Flood Risk</span>
+            <span className="text-blue-700">Flood Risk</span>
             <div className="flex items-center gap-2">
               <RiskIndicator level={floodRisk} />
               <span className={`font-medium ${getRiskColor(floodRisk)}`}>
@@ -73,7 +73,7 @@ export function WaterRiskAssessment({
 
         <div>
           <div className="flex items-center justify-between text-xs">
-            <span className="text-gray-600">Groundwater Depletion</span>
+            <span className="text-blue-700">Groundwater Depletion</span>
             <span className={`font-medium ${getDepletionColor(groundwaterDepletion)}`}>
               {groundwaterDepletion.toFixed(1)}%/year
             </span>
@@ -82,7 +82,7 @@ export function WaterRiskAssessment({
 
         <div>
           <div className="flex items-center justify-between text-xs">
-            <span className="text-gray-600">Seasonal Variability</span>
+            <span className="text-blue-700">Seasonal Variability</span>
             <div className="flex items-center gap-2">
               <RiskIndicator level={seasonalVariability} />
               <span className={`font-medium ${getRiskColor(seasonalVariability)}`}>
@@ -93,7 +93,7 @@ export function WaterRiskAssessment({
         </div>
 
         {/* Legend */}
-        <div className="mt-2 pt-2 border-t border-gray-200 grid grid-cols-2 gap-x-2 text-[10px] text-gray-500">
+        <div className="mt-2 pt-2 border-t border-blue-100 grid grid-cols-2 gap-x-2 text-[10px] text-blue-600">
           <div>• Low: Minimal risk</div>
           <div>• Medium: Moderate risk</div>
           <div>• High: Significant risk</div>
