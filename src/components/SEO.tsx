@@ -12,7 +12,7 @@ export function SEO({
   title = 'Primary Water - We Find Water Everywhere',
   description = 'Unlocking sustainable water sources worldwide through innovative primary water discovery. Expert solutions for agriculture, industry, and communities.',
   keywords = 'primary water, water finding, sustainable water, water discovery, groundwater, water solutions, water supply, we find water everywhere, water sourcing experts, sustainable water solutions, weather-independent water, pure water source, water for agriculture, industrial water supply, community water solutions',
-  image = '/files/logo.png',
+  image = 'https://findprimarywater.com/files/Primary%20Water%20Logo%20(1200%20x%20630%20px).png',
   url = 'https://findprimarywater.com'
 }: SEOProps) {
   const formattedTitle = title === 'Primary Water - Home' ? 'Primary Water - We Find Water Everywhere' : title
