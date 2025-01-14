@@ -272,7 +272,7 @@ export function ContactCard() {
             disabled={isSubmitting}
             whileHover={{ scale: isSubmitting ? 1 : 1.05 }}
             whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
-            className="w-full px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:shadow-md hover:bg-blue-600 transition-all font-medium disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden text-sm"
+            className="w-full px-6 py-3 bg-blue-500 text-white rounded-full shadow-md hover:shadow-lg hover:bg-blue-600 transition-all font-medium disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden"
           >
             <span className={`transition-opacity duration-200 ${isSubmitting ? 'opacity-0' : 'opacity-100'}`}>
               Send Message
