@@ -22,7 +22,7 @@ export function KeyboardInstructions() {
             <li>↑ / ↓ : Previous / Next section</li>
             <li>Home : First section</li>
             <li>End : Last section</li>
-            <li>1-5 : Jump to section</li>
+            <li>1-6 : Jump to section</li>
             <li>Esc : Close dialogs</li>
           </ul>
         </div>

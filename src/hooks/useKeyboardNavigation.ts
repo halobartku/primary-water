@@ -53,6 +53,7 @@ export function useKeyboardNavigation({
         case '3':
         case '4':
         case '5':
+        case '6':
           const sectionIndex = parseInt(e.key) - 1
           if (sectionIndex < totalSections) {
             e.preventDefault()
