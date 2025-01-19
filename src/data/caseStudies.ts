@@ -40,11 +40,11 @@ export const caseStudies = [
     flag: "🇸🇦"
   },
   {
-    location: "Latvia",
-    depth: 63,
-    capacity: 200,
-    videoId: "5AXGm97CHcc",
-    description: "We discovered a self-flowing primary water well in Latvia, yielding 200 cubic meters daily without pumping.",
-    flag: "🇱🇻"
+    location: "Great Arabian Desert",
+    depth: 304,
+    capacity: 2000,
+    videoId: "KnlOU2Ck6R8",
+    description: "Documenting a remarkable primary water discovery in the Great Arabian Desert (Rub' al Khali), UAE, highlighting the potential of primary water exploration.",
+    flag: "🇦🇪"
   }
 ]
