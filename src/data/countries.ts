@@ -181,7 +181,7 @@ export const countries: CountryData[] = [
   { name: 'Nauru', code: 'NRU', region: REGIONS.OCEANIA },
 
   // Middle East
-  { name: 'Saudi Arabia', code: 'SAU', region: REGIONS.MIDDLE_EAST },
+  { name: 'Kingdom of Saudi Arabia', code: 'SAU', region: REGIONS.MIDDLE_EAST },
   { name: 'Iran', code: 'IRN', region: REGIONS.MIDDLE_EAST },
   { name: 'Iraq', code: 'IRQ', region: REGIONS.MIDDLE_EAST },
   { name: 'Yemen', code: 'YEM', region: REGIONS.MIDDLE_EAST },

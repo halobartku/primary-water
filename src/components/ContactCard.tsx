@@ -94,9 +94,9 @@ export function ContactCard() {
 
   return (
     <div className="max-w-6xl w-full mx-auto bg-blue-50/30 rounded-2xl p-3 sm:p-4">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4">
-        {/* Contact Info Column */}
-        <div className="lg:col-span-4">
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4">
+      {/* Contact Info Column */}
+      <div className="lg:col-span-5">
           {/* Main Office */}
           <div className="mb-3 sm:mb-4">
             <h2 className="text-base font-bold text-blue-900 mb-2">Contact Information</h2>
@@ -121,34 +121,59 @@ export function ContactCard() {
           {/* Partners Section */}
           <div>
             <h2 className="text-base font-bold text-blue-900 mb-2">Our Partners</h2>
-            <div className="text-xs space-y-0.5">
-              <div className="text-blue-700 mb-1">NAMIBIA</div>
-              <a 
-                href="mailto:namibia@findprimarywater.com"
-                className="text-blue-500 hover:text-blue-700 transition-colors block mb-4"
-              >
-                namibia@findprimarywater.com
-              </a>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Saudi Arabia */}
+              <div className="text-xs space-y-0.5 order-first sm:order-last">
+                <div className="text-blue-700 mb-1">KINGDOM OF SAUDI ARABIA</div>
+                <a 
+                  href="mailto:anders.tofte@ikhdar.com"
+                  className="text-blue-500 hover:text-blue-700 transition-colors block mb-4"
+                >
+                  anders.tofte@ikhdar.com
+                </a>
 
-              <p className="font-medium text-blue-900">Primary Water Solutions CC</p>
-              <p className="text-blue-700">Tax Reg: CC/2024/07816</p>
-              <p className="text-blue-700">Private Bag 12012</p>
-              <p className="text-blue-700">Ausspannplatz</p>
-              <p className="text-blue-700">Windhoek</p>
-              <p className="text-blue-700">Namibia</p>
-              
-              <a 
-                href="tel:+264811294326"
-                className="text-blue-500 hover:text-blue-700 transition-colors block"
-              >
-                +264 81 129 4326
-              </a>
+                <p className="font-medium text-blue-900">IKHDAR Group</p>
+                <a 
+                  href="https://www.ikhdar.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 hover:text-blue-700 transition-colors block mb-4"
+                >
+                  https://www.ikhdar.com/
+                </a>
+                <p className="text-blue-700">Anders Tofte - Executive Chairman</p>
+              </div>
+
+              {/* Namibia */}
+              <div className="text-xs space-y-0.5 order-last sm:order-first">
+                <div className="text-blue-700 mb-1">NAMIBIA</div>
+                <a 
+                  href="mailto:namibia@findprimarywater.com"
+                  className="text-blue-500 hover:text-blue-700 transition-colors block mb-4"
+                >
+                  namibia@findprimarywater.com
+                </a>
+
+                <p className="font-medium text-blue-900">Primary Water Solutions CC</p>
+                <p className="text-blue-700">Tax Reg: CC/2024/07816</p>
+                <p className="text-blue-700">Private Bag 12012</p>
+                <p className="text-blue-700">Ausspannplatz</p>
+                <p className="text-blue-700">Windhoek</p>
+                <p className="text-blue-700">Namibia</p>
+                
+                <a 
+                  href="tel:+264811294326"
+                  className="text-blue-500 hover:text-blue-700 transition-colors block"
+                >
+                  +264 81 129 4326
+                </a>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Contact Form */}
-        <div className="lg:col-span-8 bg-white/70 backdrop-blur-sm p-3 sm:p-4 rounded-xl shadow-sm relative">
+        <div className="lg:col-span-7 bg-white/70 backdrop-blur-sm p-3 sm:p-4 rounded-xl shadow-sm relative">
           <AnimatePresence>
             {showNotification && (
               <motion.div
@@ -174,6 +199,7 @@ export function ContactCard() {
             >
               <option value="office@findprimarywater.com">Primary Water Head Office</option>
               <option value="namibia@findprimarywater.com">Primary Water Namibia</option>
+              <option value="anders.tofte@ikhdar.com">IKHDAR Group Saudi Arabia</option>
             </select>
           </div>
           <div>

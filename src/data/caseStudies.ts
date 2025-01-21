@@ -32,11 +32,11 @@ export const caseStudies = [
     flag: "🇪🇸"
   },
   {
-    location: "Saudi Arabia",
+    location: "Kingdom of Saudi Arabia",
     depth: 150,
     capacity: 1000,
     videoId: "rP5S55VzZNQ",
-    description: "Despite negative forecasts in Saudi Arabian desert, we discovered a water source yielding 1,000 cubic meters daily.",
+    description: "Despite negative forecasts in Arabian Desert, we discovered a water source yielding 1,000 cubic meters daily.",
     flag: "🇸🇦"
   },
   {
