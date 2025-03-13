@@ -43,7 +43,7 @@ export const InteractiveWellCalculator = () => {
     // Calculate values
     const hw = wellDepth - staticLevel;
     const dd = dynamicLevel - staticLevel;
-    const q = flowCoefficient * dd * hw;
+    const q = flowCoefficient / dd * hw;
     
     setWaterColumn(hw);
     setDrawdown(dd);
@@ -421,9 +421,9 @@ export const InteractiveWellCalculator = () => {
                     <div className="flex items-center">
                       <input 
                         type="number" 
-                        min="0.001" 
-                        max="20"
-                        step="0.001"
+                        min="0.01" 
+                        max="10"
+                        step="0.01"
                         value={flowCoefficient} 
                         onChange={(e) => setFlowCoefficient(Number(e.target.value))}
                         className="w-16 p-1 text-sm text-center border border-blue-200 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
@@ -433,9 +433,9 @@ export const InteractiveWellCalculator = () => {
                   </div>
                   <input 
                     type="range" 
-                    min="0.001" 
-                    max="1"
-                    step="0.001"
+                    min="0.01" 
+                    max="10"
+                    step="0.01"
                     value={flowCoefficient} 
                     onChange={(e) => setFlowCoefficient(Number(e.target.value))}
                     className="w-full h-2 bg-blue-100 rounded-lg appearance-none cursor-pointer accent-blue-600"
@@ -496,7 +496,7 @@ export const InteractiveWellCalculator = () => {
             <div className="bg-blue-100 rounded-xl shadow-md p-4">
               <h3 className="text-lg font-semibold text-blue-700 mb-3">Formula Used</h3>
               <div className="bg-white p-3 rounded-lg shadow-sm mb-4">
-                <p className="font-mono text-center text-lg">Q = V × (Hd-Hs) × Hw</p>
+                <p className="font-mono text-center text-lg">Q = V / (Hd-Hs) × Hw</p>
               </div>
               
               <div className="space-y-2">
