@@ -131,7 +131,7 @@ export const InteractiveWellCalculator = () => {
                       x1="80" 
                       y1="20" 
                       x2="80" 
-                      y2={20 + scaledStaticLevel} 
+                      y2={20 + Math.min(scaledStaticLevel, totalHeight)} 
                       stroke="#4682b4" 
                       strokeWidth="1.5" 
                       strokeDasharray="5,3" 
@@ -141,11 +141,26 @@ export const InteractiveWellCalculator = () => {
                       fill="#4682b4" 
                     />
                     <polygon 
-                      points={`80,${20 + scaledStaticLevel} 75,${10 + scaledStaticLevel} 85,${10 + scaledStaticLevel}`} 
+                      points={`80,${20 + Math.min(scaledStaticLevel, totalHeight)} 75,${10 + Math.min(scaledStaticLevel, totalHeight)} 85,${10 + Math.min(scaledStaticLevel, totalHeight)}`} 
                       fill="#4682b4" 
                     />
-                    <text x="46" y={20 + scaledStaticLevel/2} fill="#4682b4" fontFamily="Arial" fontSize="16" fontWeight="bold">Hs</text>
-                    <text x="44" y={20 + scaledStaticLevel/2 + 20} fill="#4682b4" fontFamily="Arial" fontSize="12">
+                    <text 
+                      x="46" 
+                      y={20 + Math.min(scaledStaticLevel, totalHeight)/2} 
+                      fill="#4682b4" 
+                      fontFamily="Arial" 
+                      fontSize="16" 
+                      fontWeight="bold"
+                    >
+                      Hs
+                    </text>
+                    <text 
+                      x="44" 
+                      y={20 + Math.min(scaledStaticLevel, totalHeight)/2 + 20} 
+                      fill="#4682b4" 
+                      fontFamily="Arial" 
+                      fontSize="12"
+                    >
                       {staticLevel.toFixed(0)}m
                     </text>
                     
@@ -154,7 +169,7 @@ export const InteractiveWellCalculator = () => {
                       x1="130" 
                       y1="20" 
                       x2="130" 
-                      y2={20 + scaledDynamicLevel} 
+                      y2={20 + Math.min(scaledDynamicLevel, totalHeight)} 
                       stroke="#4682b4" 
                       strokeWidth="1.5" 
                       strokeDasharray="5,3" 
@@ -164,18 +179,33 @@ export const InteractiveWellCalculator = () => {
                       fill="#4682b4" 
                     />
                     <polygon 
-                      points={`130,${20 + scaledDynamicLevel} 125,${10 + scaledDynamicLevel} 135,${10 + scaledDynamicLevel}`} 
+                      points={`130,${20 + Math.min(scaledDynamicLevel, totalHeight)} 125,${10 + Math.min(scaledDynamicLevel, totalHeight)} 135,${10 + Math.min(scaledDynamicLevel, totalHeight)}`} 
                       fill="#4682b4" 
                     />
-                    <text x="94" y={20 + scaledDynamicLevel/2} fill="#4682b4" fontFamily="Arial" fontSize="16" fontWeight="bold">Hd</text>
-                    <text x="92" y={20 + scaledDynamicLevel/2 + 20} fill="#4682b4" fontFamily="Arial" fontSize="12">
+                    <text 
+                      x="94" 
+                      y={20 + Math.min(scaledDynamicLevel, totalHeight)/2} 
+                      fill="#4682b4" 
+                      fontFamily="Arial" 
+                      fontSize="16" 
+                      fontWeight="bold"
+                    >
+                      Hd
+                    </text>
+                    <text 
+                      x="92" 
+                      y={20 + Math.min(scaledDynamicLevel, totalHeight)/2 + 20} 
+                      fill="#4682b4" 
+                      fontFamily="Arial" 
+                      fontSize="12"
+                    >
                       {dynamicLevel.toFixed(0)}m
                     </text>
                     
                     {/* Water column arrow (Hw) - right side */}
                     <line 
                       x1="245" 
-                      y1={20 + scaledStaticLevel} 
+                      y1={20 + Math.min(scaledStaticLevel, totalHeight)} 
                       x2="245" 
                       y2={20 + scaledWellDepth} 
                       stroke="#4682b4" 
@@ -183,15 +213,30 @@ export const InteractiveWellCalculator = () => {
                       strokeDasharray="5,3" 
                     />
                     <polygon 
-                      points={`245,${20 + scaledStaticLevel} 240,${30 + scaledStaticLevel} 250,${30 + scaledStaticLevel}`} 
+                      points={`245,${20 + Math.min(scaledStaticLevel, totalHeight)} 240,${30 + Math.min(scaledStaticLevel, totalHeight)} 250,${30 + Math.min(scaledStaticLevel, totalHeight)}`} 
                       fill="#4682b4" 
                     />
                     <polygon 
                       points={`245,${20 + scaledWellDepth} 240,${10 + scaledWellDepth} 250,${10 + scaledWellDepth}`} 
                       fill="#4682b4" 
                     />
-                    <text x="260" y={20 + (scaledStaticLevel + scaledWellDepth)/2} fill="#4682b4" fontFamily="Arial" fontSize="16" fontWeight="bold">Hw</text>
-                    <text x="260" y={20 + (scaledStaticLevel + scaledWellDepth)/2 + 20} fill="#4682b4" fontFamily="Arial" fontSize="12">
+                    <text 
+                      x="260" 
+                      y={20 + (Math.min(scaledStaticLevel, totalHeight) + scaledWellDepth)/2} 
+                      fill="#4682b4" 
+                      fontFamily="Arial" 
+                      fontSize="16" 
+                      fontWeight="bold"
+                    >
+                      Hw
+                    </text>
+                    <text 
+                      x="260" 
+                      y={20 + (Math.min(scaledStaticLevel, totalHeight) + scaledWellDepth)/2 + 20} 
+                      fill="#4682b4" 
+                      fontFamily="Arial" 
+                      fontSize="12"
+                    >
                       {waterColumn.toFixed(1)}m
                     </text>
                     
@@ -200,7 +245,7 @@ export const InteractiveWellCalculator = () => {
                       x1="25" 
                       y1="20" 
                       x2="25" 
-                      y2={20 + scaledWellDepth} 
+                      y2={20 + Math.min(scaledWellDepth, totalHeight)} 
                       stroke="#4682b4" 
                       strokeWidth="1.5" 
                       strokeDasharray="5,3" 
@@ -210,11 +255,26 @@ export const InteractiveWellCalculator = () => {
                       fill="#4682b4" 
                     />
                     <polygon 
-                      points={`25,${20 + scaledWellDepth} 20,${10 + scaledWellDepth} 30,${10 + scaledWellDepth}`} 
+                      points={`25,${20 + Math.min(scaledWellDepth, totalHeight)} 20,${10 + Math.min(scaledWellDepth, totalHeight)} 30,${10 + Math.min(scaledWellDepth, totalHeight)}`} 
                       fill="#4682b4" 
                     />
-                    <text x="44" y={20 + scaledWellDepth - 40} fill="#4682b4" fontFamily="Arial" fontSize="16" fontWeight="bold">H</text>
-                    <text x="42" y={20 + scaledWellDepth - 20} fill="#4682b4" fontFamily="Arial" fontSize="12">
+                    <text 
+                      x="44" 
+                      y={20 + Math.min(scaledWellDepth, totalHeight) - 40} 
+                      fill="#4682b4" 
+                      fontFamily="Arial" 
+                      fontSize="16" 
+                      fontWeight="bold"
+                    >
+                      H
+                    </text>
+                    <text 
+                      x="42" 
+                      y={20 + Math.min(scaledWellDepth, totalHeight) - 20} 
+                      fill="#4682b4" 
+                      fontFamily="Arial" 
+                      fontSize="12"
+                    >
                       {wellDepth.toFixed(0)}m
                     </text>
                     
@@ -222,15 +282,30 @@ export const InteractiveWellCalculator = () => {
                     <g style={{ zIndex: 10 }}>
                       <line 
                         x1="170" 
-                        y1={20 + pumpDepth * scale} 
+                        y1={20 + Math.min(pumpDepth * scale, totalHeight)} 
                         x2="210" 
-                        y2={20 + pumpDepth * scale} 
+                        y2={20 + Math.min(pumpDepth * scale, totalHeight)} 
                         stroke="#ff6347" 
                         strokeWidth="2" 
                         strokeDasharray="5,3" 
                       />
-                      <text x="125" y={25 + pumpDepth * scale} fill="#ff6347" fontFamily="Arial" fontSize="14" fontWeight="bold">Pump</text>
-                      <text x="125" y={25 + pumpDepth * scale + 20} fill="#ff6347" fontFamily="Arial" fontSize="12">
+                      <text 
+                        x="125" 
+                        y={25 + Math.min(pumpDepth * scale, totalHeight)} 
+                        fill="#ff6347" 
+                        fontFamily="Arial" 
+                        fontSize="14" 
+                        fontWeight="bold"
+                      >
+                        Pump
+                      </text>
+                      <text 
+                        x="125" 
+                        y={25 + Math.min(pumpDepth * scale, totalHeight) + 20} 
+                        fill="#ff6347" 
+                        fontFamily="Arial" 
+                        fontSize="12"
+                      >
                         {pumpDepth.toFixed(0)}m
                       </text>
                     </g>
