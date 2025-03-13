@@ -43,6 +43,9 @@ const PrivacyPolicy = lazy(() =>
 const WaterStressVisualization = lazy(() => 
   import('./components/WaterStressVisualization')
 )
+const InteractiveWellCalculator = lazy(() => 
+  import('./components/InteractiveWellCalculator').then(module => ({ default: module.InteractiveWellCalculator }))
+)
 
 // Page transition variants
 const pageTransition = {
@@ -380,6 +383,11 @@ export default function App() {
             <Route path="/privacy" element={
               <Suspense fallback={<LoadingSpinner />}>
                 <PrivacyPolicy />
+              </Suspense>
+            } />
+            <Route path="/flow" element={
+              <Suspense fallback={<LoadingSpinner />}>
+                <InteractiveWellCalculator />
               </Suspense>
             } />
             <Route path="*" element={<Navigate to="/" replace />} />

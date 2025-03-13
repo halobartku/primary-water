@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Linkedin, Youtube } from 'lucide-react'
+import { Linkedin, Youtube, Droplet } from 'lucide-react'
 
 export function Footer() {
   const [isMobile, setIsMobile] = useState(false)
@@ -65,6 +65,13 @@ export function Footer() {
             >
               <Youtube className="w-5 h-5 md:w-6 md:h-6" />
             </a>
+            <a
+              href="/flow"
+              className="relative text-blue-600 hover:text-blue-800 transition-colors cursor-pointer z-[9999]"
+              aria-label="Go to Flow Calculator"
+            >
+              <Droplet className="w-5 h-5 md:w-6 md:h-6" />
+            </a>
           </div>
         </div>
         <div className="hidden md:flex items-center gap-4">
@@ -94,6 +101,13 @@ export function Footer() {
               aria-label="Subscribe to our YouTube channel"
             >
               <Youtube className="w-6 h-6" />
+            </a>
+            <a
+              href="/flow"
+              className="relative text-blue-600 hover:text-blue-800 transition-colors cursor-pointer z-[9999]"
+              aria-label="Go to Flow Calculator"
+            >
+              <Droplet className="w-6 h-6" />
             </a>
           </div>
         </div>
