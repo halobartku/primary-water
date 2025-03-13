@@ -73,7 +73,7 @@ export const InteractiveWellCalculator = () => {
       </div>
       
       <div className="bg-white rounded-xl shadow-lg max-w-7xl mx-auto w-full p-4 overflow-hidden scale-95 transform origin-top">
-        <h2 className="text-xl md:text-2xl font-bold text-blue-900 mb-4 text-center">Water Well Capacity Calculator</h2>
+        <h2 className="text-xl md:text-2xl font-bold text-blue-900 mb-4 text-center">Primary Water Well Capacity Calculator</h2>
         
         <div className="flex flex-col lg:flex-row gap-4 items-start justify-center">
           {/* Left side: Interactive diagram with sliders */}
