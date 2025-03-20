@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Download } from 'lucide-react';
+import { generateWellReportPDF } from './pdfgenerator/index';
 
 export const InteractiveWellCalculator = () => {
   // State for user inputs
@@ -9,6 +10,7 @@ export const InteractiveWellCalculator = () => {
   const [dynamicLevel, setDynamicLevel] = useState(61);
   const [flowCoefficient, setFlowCoefficient] = useState(0.2);
   const [pumpDepth, setPumpDepth] = useState(245);
+  const [placeName, setPlaceName] = useState(""); // New state for place name
   
   // Calculated values
   const [waterColumn, setWaterColumn] = useState(0);
@@ -60,6 +62,36 @@ export const InteractiveWellCalculator = () => {
   const scaledDynamicLevel = dynamicLevel * scale;
   const scaledWellDepth = wellDepth * scale;
   
+  // PDF Generation Function
+  const generatePDF = () => {
+    // Collect all data needed for the PDF
+    const data = {
+      placeName,
+      wellDepth,
+      staticLevel,
+      dynamicLevel,
+      pumpDepth,
+      flowCoefficient,
+      waterColumn,
+      drawdown,
+      hourlyCapacity,
+      dailyCapacity
+    };
+    
+    // Show loading indicator or message
+    if (!placeName.trim()) {
+      alert("Please enter a location name before generating a PDF");
+      return;
+    }
+    
+    // Generate the PDF using our utility
+    generateWellReportPDF(data)
+      .catch(error => {
+        console.error("Error generating PDF:", error);
+        alert("There was an error generating the PDF. Please try again.");
+      });
+  };
+  
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 flex flex-col items-center justify-center p-2">
       <div className="w-full max-w-7xl mx-auto mb-2 px-4">
@@ -74,6 +106,18 @@ export const InteractiveWellCalculator = () => {
       
       <div className="bg-white rounded-xl shadow-lg max-w-7xl mx-auto w-full p-4 overflow-hidden scale-95 transform origin-top">
         <h2 className="text-xl md:text-2xl font-bold text-blue-900 mb-4 text-center">Primary Water Well Capacity Calculator</h2>
+        
+        {/* Location Input Field */}
+        <div className="mb-4 max-w-md mx-auto">
+          <label className="block text-sm font-medium text-blue-800 mb-1">Location Name:</label>
+          <input 
+            type="text" 
+            value={placeName} 
+            onChange={(e) => setPlaceName(e.target.value)}
+            placeholder="Enter location name (required for PDF export)"
+            className="w-full p-2 border border-blue-200 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+          />
+        </div>
         
         <div className="flex flex-col lg:flex-row gap-4 items-start justify-center">
           {/* Left side: Interactive diagram with sliders */}
@@ -536,6 +580,25 @@ export const InteractiveWellCalculator = () => {
                 <li>• This calculator uses the Dupuit-Sass formula.</li>
                 <li>• Adjust values using the sliders for interactive results.</li>
               </ul>
+              
+              {/* Download PDF Button */}
+              <div className="mt-4">
+                <button
+                  onClick={generatePDF}
+                  disabled={!placeName.trim()}
+                  className={`w-full flex items-center justify-center gap-2 p-2 rounded-md ${
+                    placeName.trim() 
+                      ? 'bg-blue-600 hover:bg-blue-700 text-white' 
+                      : 'bg-gray-300 cursor-not-allowed text-gray-500'
+                  } transition-colors`}
+                >
+                  <Download size={18} />
+                  <span>Download PDF Report</span>
+                </button>
+                {!placeName.trim() && (
+                  <p className="text-xs text-red-500 mt-1">Please enter a location name to enable PDF download</p>
+                )}
+              </div>
             </div>
           </div>
         </div>
