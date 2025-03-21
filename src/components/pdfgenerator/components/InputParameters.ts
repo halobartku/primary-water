@@ -1,5 +1,5 @@
 import { jsPDF } from 'jspdf';
-import { COLORS, GRID, FONT_SIZES } from '../utils/constants';
+import { GRID, FONT_SIZES } from '../utils/constants';
 import { WellReportData } from '../utils/types';
 
 /**

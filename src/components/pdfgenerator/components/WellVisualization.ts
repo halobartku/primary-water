@@ -21,7 +21,7 @@ export const addWellVisualization = (doc: jsPDF, data: WellReportData): void => 
   const wellLeftX = centerX - (wellWidth / 2);
   const wellRightX = centerX + (wellWidth / 2);
   const innerWellLeftX = centerX - (innerWellWidth / 2);
-  const innerWellRightX = centerX + (innerWellWidth / 2);
+  // innerWellRightX is not used in this component
   
   // Scale factor for proper positioning - use adaptive scaling based on well depth
   const maxHeight = Math.min(800, data.wellDepth); // Cap maximum height for extreme depths
@@ -85,12 +85,12 @@ export const addWellVisualization = (doc: jsPDF, data: WellReportData): void => 
   // Pump label - position to avoid overlap with other elements
   doc.setTextColor(COLORS.pumpRed[0], COLORS.pumpRed[1], COLORS.pumpRed[2]);
   // Check if pump is close to dynamic level and adjust position
-  const pumpLabelY = (Math.abs(pumpY - dynamicY) < 10) ? pumpY - 5 : pumpY + 1;
+  const pumpLabelY = (Math.abs(pumpY - dynamicY) < 10) ? pumpY + 3  : pumpY + 1;
   doc.text('Pump', wellRightX + 3, pumpLabelY);
   doc.text(`${data.pumpDepth} m`, wellRightX + 3, pumpLabelY + 5);
   
   // Use adaptive positioning for dimension lines based on well depth
-  drawDimensionLines(doc, data, wellLeftX, wellRightX, startY, wellBottomY, staticY, dynamicY);
+  drawDimensionLines(doc, data, wellLeftX, wellRightX, startY, wellBottomY, staticY);
 };
 
 /**
@@ -100,11 +100,10 @@ function drawDimensionLines(
   doc: jsPDF, 
   data: WellReportData, 
   wellLeftX: number, 
-  wellRightX: number, 
+  _wellRightX: number, // Prefixed with underscore as it's not used in this function
   startY: number, 
   wellBottomY: number, 
-  staticY: number, 
-  dynamicY: number
+  staticY: number
 ): void {
   // Determine spacing based on well depth to avoid crowding
   const spacingFactor = data.wellDepth > 300 ? 0.8 : 1;
