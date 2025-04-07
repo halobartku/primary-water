@@ -44,12 +44,12 @@ export function PrivacyPreferences({ onClose }: PrivacyPreferencesProps) {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.9 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-blue-900/20 backdrop-blur-sm"
+          initial={{ opacity: 0, x: -50, y: 50 }}
+          animate={{ opacity: 1, x: 0, y: 0 }}
+          exit={{ opacity: 0, x: -50, y: 50 }}
+          className="fixed bottom-4 left-4 z-[10000]" // Further increased z-index
         >
-          <div className="bg-white rounded-2xl shadow-xl max-w-md w-full overflow-hidden">
+          <div className="bg-white rounded-2xl shadow-lg w-11/12 max-w-sm sm:w-96 overflow-hidden">
             <div className="p-6">
               <div className="flex items-start gap-4 mb-4">
                 <Cookie className="w-6 h-6 text-blue-500 flex-shrink-0 mt-1" />
