@@ -15,6 +15,7 @@ import { PrivacyPreferences } from './components/PrivacyPreferences'
 import { caseStudies } from './data/caseStudies'
 import type { NavItem } from './types'
 import { SpeedInsights } from '@vercel/speed-insights/react'
+import { Analytics } from '@vercel/analytics/react'
 import { AppProvider, useApp } from './context/AppContext'
 import { WaterGameProvider, useWaterGame } from './context/WaterGameContext'
 import { ErrorBoundary } from './components/ErrorBoundary'
@@ -22,28 +23,28 @@ import { LoadingSpinner } from './components/LoadingSpinner'
 import { useKeyboardNavigation } from './hooks/useKeyboardNavigation'
 
 // Lazy load components with named exports
-const AboutUs = lazy(() => 
+const AboutUs = lazy(() =>
   import('./components/AboutUs').then(module => ({ default: module.AboutUs }))
 )
-const WhatIsPrimaryWater = lazy(() => 
+const WhatIsPrimaryWater = lazy(() =>
   import('./components/WhatIsPrimaryWater').then(module => ({ default: module.WhatIsPrimaryWater }))
 )
-const CaseStudyCard = lazy(() => 
+const CaseStudyCard = lazy(() =>
   import('./components/CaseStudyCard').then(module => ({ default: module.CaseStudyCard }))
 )
-const ContactCard = lazy(() => 
+const ContactCard = lazy(() =>
   import('./components/ContactCard').then(module => ({ default: module.ContactCard }))
 )
-const Footer = lazy(() => 
+const Footer = lazy(() =>
   import('./components/Footer').then(module => ({ default: module.Footer }))
 )
-const PrivacyPolicy = lazy(() => 
+const PrivacyPolicy = lazy(() =>
   import('./components/PrivacyPolicy').then(module => ({ default: module.PrivacyPolicy }))
 )
-const WaterStressVisualization = lazy(() => 
+const WaterStressVisualization = lazy(() =>
   import('./components/WaterStressVisualization')
 )
-const InteractiveWellCalculator = lazy(() => 
+const InteractiveWellCalculator = lazy(() =>
   import('./components/InteractiveWellCalculator').then(module => ({ default: module.InteractiveWellCalculator }))
 )
 
@@ -55,18 +56,18 @@ const pageTransition = {
 }
 
 function MainContent() {
-  const { 
-    currentSection, 
-    setCurrentSection, 
-    isMobile, 
-    showPrivacyPreferences, 
+  const {
+    currentSection,
+    setCurrentSection,
+    isMobile,
+    showPrivacyPreferences,
     setShowPrivacyPreferences,
     isScrolling,
-    setIsScrolling 
+    setIsScrolling
   } = useApp()
-  
+
   const { waterDrops, waterCollected, mousePosition, handleMouseMove } = useWaterGame()
-  
+
   const sectionsRef = useRef<(HTMLElement | null)[]>([])
   const containerRef = useRef<HTMLDivElement>(null)
   const scrollAccumulator = useRef(0)
@@ -120,13 +121,13 @@ function MainContent() {
           return
         }
       }
-      
+
       e.preventDefault()
-      
+
       if (isScrolling || !containerRef.current) return
 
       const now = Date.now()
-      
+
       if (now - lastAccumulatorReset.current > ACCUMULATOR_RESET_DELAY) {
         scrollAccumulator.current = 0
         lastAccumulatorReset.current = now
@@ -160,20 +161,20 @@ function MainContent() {
 
       setIsScrolling(true)
       lastScrollTime.current = now
-      
+
       let nextSection = currentSection
-      
+
       if (scrollAccumulator.current < 0 && currentSection > 0) {
         nextSection = currentSection - 1
       } else if (scrollAccumulator.current > 0 && currentSection < sectionsRef.current.length - 1) {
         nextSection = currentSection + 1
       }
-      
+
       scrollAccumulator.current = 0
       lastAccumulatorReset.current = now
-      
+
       scrollToSection(nextSection)
-      
+
       setTimeout(() => {
         setIsScrolling(false)
       }, 500)
@@ -218,14 +219,14 @@ function MainContent() {
   }, [setCurrentSection])
 
   return (
-    <div 
+    <div
       className="min-h-screen bg-hero-gradient overflow-x-hidden flex flex-col"
       onMouseMove={handleMouseMove}
     >
-      <SEO 
+      <SEO
         title={`Primary Water - ${sections[currentSection].title}`}
         description={
-          currentSection === 0 
+          currentSection === 0
             ? "Discover sustainable water sources with Primary Water. We specialize in locating natural water sources using innovative methods."
             : `Learn about ${sections[currentSection].title.toLowerCase()} at Primary Water`
         }
@@ -237,7 +238,7 @@ function MainContent() {
 
       {/* Logo */}
       <div className="fixed left-4 top-4 z-50">
-        <img 
+        <img
           src="/files/Primary-Water_LOGO_v03.png"
           alt="Primary Water Logo"
           className="h-8 md:h-12 w-auto"
@@ -247,10 +248,10 @@ function MainContent() {
       <BackgroundAnimations />
       <MouseAnimations waterDrops={waterDrops} mousePosition={mousePosition} />
       <WaterCollector waterCollected={waterCollected} />
-      
+
       {/* Main Navigation */}
       <nav id="main-nav" role="navigation" aria-label="Main navigation">
-        <Navigation 
+        <Navigation
           sections={sections}
           currentSection={currentSection}
           onNavigate={scrollToSection}
@@ -258,7 +259,7 @@ function MainContent() {
       </nav>
 
       {/* Content sections */}
-      <main 
+      <main
         id="main-content"
         ref={containerRef}
         className={`
@@ -272,7 +273,7 @@ function MainContent() {
         aria-live="polite"
       >
         {sections.map((section, index) => (
-          <motion.section 
+          <motion.section
             key={section.id}
             ref={el => sectionsRef.current[index] = el}
             className={`
@@ -309,7 +310,7 @@ function MainContent() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: idx * 0.1 }}
                           >
-                            <CaseStudyCard 
+                            <CaseStudyCard
                               {...study}
                             />
                           </motion.div>
@@ -348,7 +349,7 @@ function MainContent() {
           <PrivacyPreferences onClose={() => setShowPrivacyPreferences(false)} />
         </div>
       )}
-      
+
       <Suspense fallback={null}>
         <Footer />
       </Suspense>
@@ -395,6 +396,7 @@ export default function App() {
         </AnimatePresence>
       </ErrorBoundary>
       <SpeedInsights />
+      <Analytics />
     </Router>
   )
 }
