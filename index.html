@@ -44,7 +44,7 @@
     <meta name="apple-mobile-web-app-title" content="Primary Water" />
 
     <!-- Content Security Policy -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://analytics.vercel.app https://va.vercel-scripts.com; connect-src 'self' https://analytics.vercel.app https://vitals.vercel-insights.com https://va.vercel-scripts.com https://*.vercel-insights.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://analytics.vercel.app https://va.vercel-scripts.com; connect-src 'self' https://analytics.vercel.app https://vitals.vercel-insights.com https://va.vercel-scripts.com https://*.vercel-insights.com https://api.worldbank.org; img-src 'self' data: https: *.ytimg.com *.youtube.com; style-src 'self' 'unsafe-inline'; frame-src 'self' https://www.youtube.com https://youtube.com https://player.vimeo.com;">
 
     <link rel="canonical" href="https://findprimarywater.com" />
     <link rel="apple-touch-icon" href="/files/favicon primary water.png" />
@@ -108,6 +108,56 @@
           "target": "https://findprimarywater.com/search?q={search_term_string}",
           "query-input": "required name=search_term_string"
         }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Primary Water Discovery",
+        "provider": {
+          "@type": "Organization",
+          "name": "Primary Water Sp. z o. o."
+        },
+        "description": "Sustainable water source discovery using innovative primary water techniques. Weather-independent water solutions for agriculture, industry, and communities.",
+        "areaServed": "Worldwide",
+        "serviceType": "Water Discovery",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is primary water?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Primary water is newly created water that originates deep within the Earth and has never been part of the hydrologic cycle. It's a sustainable, weather-independent water source that can be accessed through specialized drilling techniques."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How is primary water different from groundwater?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Unlike groundwater which comes from precipitation and is part of the hydrologic cycle, primary water is newly created within the Earth through geological processes. It's typically purer, more abundant, and not dependent on rainfall patterns."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do you find primary water?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Primary water is located using specialized techniques that identify geological fractures and faults where water flows upward from deep within the Earth. Our experts use a combination of geological knowledge, remote sensing, and field methods to pinpoint optimal drilling locations."
+            }
+          }
+        ]
       }
     </script>
   </head>
