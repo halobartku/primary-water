@@ -48,6 +48,10 @@ const InteractiveWellCalculator = lazy(() =>
   import('./components/InteractiveWellCalculator').then(module => ({ default: module.InteractiveWellCalculator }))
 )
 
+const PriceStructurePage = lazy(() =>
+  import('./components/PriceStructurePage').then(module => ({ default: module.PriceStructurePage }))
+)
+
 // Page transition variants
 const pageTransition = {
   initial: { opacity: 0, x: -20 },
@@ -389,6 +393,15 @@ export default function App() {
             <Route path="/flow" element={
               <Suspense fallback={<LoadingSpinner />}>
                 <InteractiveWellCalculator />
+              </Suspense>
+            } />
+            <Route path="/pricestructure" element={
+              <Suspense fallback={<LoadingSpinner />}>
+                <AppProvider>
+                  <WaterGameProvider>
+                    <PriceStructurePage />
+                  </WaterGameProvider>
+                </AppProvider>
               </Suspense>
             } />
             <Route path="*" element={<Navigate to="/" replace />} />
