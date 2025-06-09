@@ -9,6 +9,17 @@ export function PricingCalculator({ className = '' }: PricingCalculatorProps) {
   const [volume, setVolume] = useState(100000)
   const [activeCard, setActiveCard] = useState<string | null>(null)
 
+  // Error boundary for calculations
+  if (!volume || volume < 1) {
+    return (
+      <div className="py-8 px-4 text-center">
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+          <p className="text-red-600">Invalid volume value. Please refresh the page.</p>
+        </div>
+      </div>
+    )
+  }
+
   // Calculations
   const instantTotal = volume * 400
   const balancedMonthly = volume * 15
@@ -17,12 +28,17 @@ export function PricingCalculator({ className = '' }: PricingCalculatorProps) {
   const premiumTotal = volume * 700
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-EU', {
-      style: 'currency',
-      currency: 'EUR',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    }).format(amount)
+    try {
+      return new Intl.NumberFormat('en-EU', {
+        style: 'currency',
+        currency: 'EUR',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+      }).format(amount)
+    } catch (error) {
+      // Fallback for browsers that don't support Intl.NumberFormat
+      return `€${amount.toLocaleString()}`
+    }
   }
 
   const generateTimelineData = () => {
@@ -98,7 +114,10 @@ export function PricingCalculator({ className = '' }: PricingCalculatorProps) {
                 type="number"
                 id="volume"
                 value={volume}
-                onChange={(e) => setVolume(Number(e.target.value) || 1)}
+                onChange={(e) => {
+                  const value = Number(e.target.value)
+                  setVolume(isNaN(value) || value < 1 ? 1 : value)
+                }}
                 min="1"
                 step="1000"
                 className="w-64 px-6 py-4 text-xl font-semibold text-center border-3 border-slate-300 rounded-xl
@@ -298,9 +317,9 @@ export function PricingCalculator({ className = '' }: PricingCalculatorProps) {
                   </tr>
                 </thead>
                 <tbody>
-                  {timelineData.map((row, index) => (
+                  {timelineData && timelineData.length > 0 ? timelineData.map((row, index) => (
                     <motion.tr
-                      key={row.month}
+                      key={`timeline-${row.month}-${index}`}
                       className={`
                         ${index % 2 === 0 ? 'bg-slate-50' : 'bg-white'}
                         ${row.isHighlight ? 'bg-gradient-to-r from-yellow-100 to-yellow-50 border-2 border-yellow-400' : ''}
@@ -308,7 +327,7 @@ export function PricingCalculator({ className = '' }: PricingCalculatorProps) {
                       `}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.05 }}
+                      transition={{ delay: Math.min(index * 0.05, 1) }}
                     >
                       <td className="px-3 md:px-6 py-4 text-center font-semibold">
                         {row.month === 0 ? 'Start' : row.month}
@@ -335,7 +354,13 @@ export function PricingCalculator({ className = '' }: PricingCalculatorProps) {
                         {row.bestOption}
                       </td>
                     </motion.tr>
-                  ))}
+                  )) : (
+                    <tr>
+                      <td colSpan={8} className="px-6 py-4 text-center text-slate-500">
+                        Loading timeline data...
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>
