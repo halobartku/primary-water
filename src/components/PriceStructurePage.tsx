@@ -1,33 +1,12 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import { Helmet } from 'react-helmet-async'
 import { ArrowLeft, LogOut } from 'lucide-react'
 import { PasswordProtection } from './PasswordProtection'
 import { PricingCalculator } from './PricingModel'
-import { BackgroundAnimations } from './BackgroundAnimations'
-import { MouseAnimations } from './MouseAnimations'
-import { WaterCollector } from './WaterCollector'
-import { useWaterGame } from '../context/WaterGameContext'
 
 export function PriceStructurePage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-
-  // Safe water game context usage with error handling
-  let waterGameData
-  try {
-    waterGameData = useWaterGame()
-  } catch (error) {
-    console.warn('Water game context not available:', error)
-    waterGameData = {
-      waterDrops: [],
-      waterCollected: 0,
-      mousePosition: { x: 0, y: 0 },
-      handleMouseMove: () => {}
-    }
-  }
-
-  const { waterDrops, waterCollected, mousePosition, handleMouseMove } = waterGameData
 
   const handleLogout = () => {
     localStorage.removeItem('pricestructure_authenticated')
@@ -48,14 +27,7 @@ export function PriceStructurePage() {
       </Helmet>
 
       <PasswordProtection onAuthenticated={() => setIsAuthenticated(true)}>
-        <div className="min-h-screen bg-hero-gradient overflow-x-hidden flex flex-col" onMouseMove={handleMouseMove}>
-          {/* Background Animations */}
-          <div className="absolute inset-0 pointer-events-none">
-            <BackgroundAnimations />
-            <MouseAnimations waterDrops={waterDrops} mousePosition={mousePosition} />
-            <WaterCollector waterCollected={waterCollected} />
-          </div>
-
+        <div className="min-h-screen bg-hero-gradient overflow-x-hidden flex flex-col">
           {/* Logo */}
           <div className="fixed left-4 top-4 z-30">
             <img
@@ -78,17 +50,14 @@ export function PriceStructurePage() {
               </Link>
 
               {isAuthenticated && (
-                <motion.button
+                <button
                   onClick={handleLogout}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.5 }}
                   className="inline-flex items-center gap-2 px-4 py-2 bg-red-500/90 backdrop-blur-sm text-white
                            hover:bg-red-600 transition-colors rounded-xl shadow-lg hover:shadow-xl"
                 >
                   <LogOut className="w-4 h-4" />
                   <span className="font-medium">Logout</span>
-                </motion.button>
+                </button>
               )}
             </div>
           </div>
