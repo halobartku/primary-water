@@ -398,9 +398,7 @@ export default function App() {
             <Route path="/pricestructure" element={
               <Suspense fallback={<LoadingSpinner />}>
                 <AppProvider>
-                  <WaterGameProvider>
-                    <PriceStructurePage />
-                  </WaterGameProvider>
+                  <PriceStructurePage />
                 </AppProvider>
               </Suspense>
             } />
