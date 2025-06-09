@@ -12,7 +12,22 @@ import { useWaterGame } from '../context/WaterGameContext'
 
 export function PriceStructurePage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const { waterDrops, waterCollected, mousePosition, handleMouseMove } = useWaterGame()
+
+  // Safe water game context usage with error handling
+  let waterGameData
+  try {
+    waterGameData = useWaterGame()
+  } catch (error) {
+    console.warn('Water game context not available:', error)
+    waterGameData = {
+      waterDrops: [],
+      waterCollected: 0,
+      mousePosition: { x: 0, y: 0 },
+      handleMouseMove: () => {}
+    }
+  }
+
+  const { waterDrops, waterCollected, mousePosition, handleMouseMove } = waterGameData
 
   const handleLogout = () => {
     localStorage.removeItem('pricestructure_authenticated')
@@ -35,9 +50,11 @@ export function PriceStructurePage() {
       <PasswordProtection onAuthenticated={() => setIsAuthenticated(true)}>
         <div className="min-h-screen bg-hero-gradient overflow-x-hidden flex flex-col" onMouseMove={handleMouseMove}>
           {/* Background Animations */}
-          <BackgroundAnimations />
-          <MouseAnimations waterDrops={waterDrops} mousePosition={mousePosition} />
-          <WaterCollector waterCollected={waterCollected} />
+          <div className="absolute inset-0 pointer-events-none">
+            <BackgroundAnimations />
+            <MouseAnimations waterDrops={waterDrops} mousePosition={mousePosition} />
+            <WaterCollector waterCollected={waterCollected} />
+          </div>
 
           {/* Logo */}
           <div className="fixed left-4 top-4 z-30">
