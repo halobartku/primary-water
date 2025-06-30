@@ -168,6 +168,27 @@ export function ContactCard() {
                   +264 81 129 4326
                 </a>
               </div>
+              {/* CCES gmbH */}
+              <div className="text-xs space-y-0.5">
+                <div className="text-blue-700 mb-1">CCES gmbH</div>
+                <p className="font-medium text-blue-900">Tuefenbergstrasse 1</p>
+                <p className="text-blue-700">9107 Urnaesch, Appenzell Ausserrhoden, Switzerland</p>
+                <p className="text-blue-700">(Firmennummer CHE-432.970.672)</p>
+                <p className="text-blue-700">CEO-Artur Welman</p>
+                <p className="text-blue-700">Managing Partner - Consortium Member</p>
+                <a
+                  href="mailto:artur.welman@findprimarywater.com"
+                  className="text-blue-500 hover:text-blue-700 transition-colors block mb-4"
+                >
+                  artur.welman@findprimarywater.com
+                </a>
+                <a
+                  href="tel:+491606017614"
+                  className="text-blue-500 hover:text-blue-700 transition-colors block"
+                >
+                  +49 160 601 76 14
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -200,6 +221,7 @@ export function ContactCard() {
               <option value="office@findprimarywater.com">Primary Water Head Office</option>
               <option value="namibia@findprimarywater.com">Primary Water Namibia</option>
               <option value="anders.tofte@ikhdar.com">IKHDAR Group Saudi Arabia</option>
+              <option value="artur.welman@findprimarywater.com">CCES gmbH Switzerland</option>
             </select>
           </div>
           <div>
